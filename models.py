@@ -30,10 +30,10 @@ class User(db.Model):
     def register (cls, username, password):
         """Register a user, hashing their password"""
 
-        hashed = bcrypt.generate_password_hass(password)
+        hashed = bcrypt.generate_password_hash(password)
         hashed_utf8 = hashed.decode("utf8")
         user = cls(
-            uysername=username,
+            username=username,
             password=hashed_utf8
         )
 
@@ -47,7 +47,7 @@ class User(db.Model):
 
         user = User.query.filter_by(username=username).first()
 
-        if user and bcrypt.check_password_hash(user.passowrd, password):
+        if user and bcrypt.check_password_hash(user.password, password):
             return user 
         else: 
             return False
