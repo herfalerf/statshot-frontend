@@ -2,10 +2,13 @@ from flask import Flask, jsonify, request, session
 import requests
 from flask_debugtoolbar import DebugToolbarExtension
 from secrets import API_SECRET_KEY
-
+from forms import RegisterForm
 from models import connect_db, db, User, Preference
 
+
+
 app = Flask(__name__)
+
 
 API_BASE_URL = "https://statsapi.web.nhl.com/api/v1"
 
@@ -13,10 +16,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///statshot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = API_SECRET_KEY
+app.config['WTF_CSRF_ENABLED'] = False
 
 debug = DebugToolbarExtension(app)
 
 connect_db(app)
+
+
 
 
 @app.route('/api/teams', methods=["GET"])
@@ -42,20 +48,26 @@ def register():
     """Register a user:  receive JSON form data and submit to DB"""
     
     success = {}
+    form = RegisterForm()
 
-    username = request.json["username"]
-    password = request.json["password"]
+    if form.validate_on_submit():
 
-    user = User.register(username, password)
+        username = request.json["username"]
+        password = request.json["password"]
 
-    db.session.add(user)
-    db.session.commit()
+        user = User.register(username, password)
 
-    session['username'] = user.username
+        db.session.add(user)
+        db.session.commit()
 
-    success['success'] = 'True'
+        session['username'] = user.username
+
+        success['success'] = 'True'
     
-    return jsonify(success)
+        return jsonify(success)
+    else:
+        success['success'] = 'False'
+        return jsonify(success)
 
     
 @app.route('/api/login', methods=["POST"])
