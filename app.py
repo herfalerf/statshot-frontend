@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, session
 import requests
 from flask_debugtoolbar import DebugToolbarExtension
 from secrets import API_SECRET_KEY
-from forms import RegisterForm
+from forms import RegisterForm, LoginForm
 from models import connect_db, db, User, Preference
 
 
@@ -75,17 +75,26 @@ def login():
     """Login a user: recieve JSON form data and authenticate username/password."""
 
     success = {}
+    form = LoginForm()
 
-    username = request.json["username"]
-    password = request.json["password"]
+    if form.validate_on_submit():
 
-    user = User.authenticate(username, password)
-    if user: 
-        session['username'] = user.username
-        success['success'] = 'True'
+        username = request.json["username"]
+        password = request.json["password"]
 
-        return jsonify(success)
-    else:
-        success['success'] = 'False'
+        user = User.authenticate(username, password)
+        if user: 
+            session['username'] = user.username
+            success['success'] = 'True'
+
+            return jsonify(success)
+        else:
+            success['success'] = 'False'
         
-        return jsonify(success)
+            return jsonify(success)
+
+@app.route('/api/prefs', methods=["GET", "POST"])
+def prefs():
+    """Get user prefs on GET request, set user prefs on POST request"""
+
+    
