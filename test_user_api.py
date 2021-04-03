@@ -233,3 +233,14 @@ class UserAPITestCase(TestCase):
 
             self.assertEqual(resp_logout.status_code, 200)
             self.assertIn('logout', str(json_data))
+
+    def test_user_not_in_session_on_logout(self):
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+            
+            resp_logout = c.post('/api/users/logout')
+
+            self.assertNotIn(str(session), 'username')
+            self.assertNotIn(str(session), 'user_id')
