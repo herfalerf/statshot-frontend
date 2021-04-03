@@ -1,5 +1,5 @@
 """User API tests."""
-from flask import jsonify
+from flask import session
 import os
 from unittest import TestCase
 from models import db, connect_db, User, Preference
@@ -18,6 +18,8 @@ class UserAPITestCase(TestCase):
 
         db.drop_all()
         db.create_all()
+
+        app.config['SECRET_KEY'] = 'testsecretkey'
 
         self.client = app.test_client()
 
@@ -91,3 +93,14 @@ class UserAPITestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn('False', str(json_data))
+    
+    def test_user_in_session_on_reg(self):
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+            
+            user = User.query.filter_by(username='validreg').first()
+
+            self.assertEqual(session['username'], user.username)
+            self.assertEqual(session['user_id'], user.id)
