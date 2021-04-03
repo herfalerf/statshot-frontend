@@ -28,7 +28,7 @@ class PrefsModelTestCase(TestCase):
 
         p1 = Preference(
              user_id = u1.id,
-             fav_team_ud = 25
+             fav_team_id = 25
         )
 
         db.session.commit()
@@ -42,5 +42,24 @@ class PrefsModelTestCase(TestCase):
         db.session.rollback()
         return res
 
+    def test_prefs_models(self):
+        """Test basic preference functionality"""
+        u = User.register("testprefs", "prefsword")
+        uid = 222
+        u.id = uid
+        db.session.add(u)
+        db.session.commit()
+
+        p = Preference(
+            user_id = u.id,
+            fav_team_id = 2
+        )
+        
+        db.session.add(p)
+        db.session.commit()
+
+        ptest = Preference.query.get(p.user_id)
+
+        self.assertEqual(ptest.fav_team_id, 2)
 
 
