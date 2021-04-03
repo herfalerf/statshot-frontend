@@ -35,6 +35,7 @@ class UserModelTestCase(TestCase):
         self.client = app.test_client()
     
     def tearDown(self):
+        """Tear down after each test"""
         res = super().tearDown()
         db.session.rollback()
         return res
