@@ -72,3 +72,10 @@ class UserModelTestCase(TestCase):
         invalid.id = uid
         with self.assertRaises(exc.IntegrityError) as context:
             db.session.commit()
+    
+    def test_invalid_password_signup(self):
+        with self.assertRaises(ValueError) as context:
+            User.register("passtest", None)
+        
+        with self.assertRaises(ValueError) as context:
+            User.register("passtest", "")
