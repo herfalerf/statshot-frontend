@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request, session
 import requests
 from flask_debugtoolbar import DebugToolbarExtension
 from secrets import API_SECRET_KEY
-from forms import RegisterForm, LoginForm
+from forms import RegisterForm, LoginForm, PrefsForm
 from models import connect_db, db, User, Preference
 
 
@@ -28,22 +28,29 @@ connect_db(app)
 @app.route('/api/teams', methods=["GET"])
 def get_teams():
     """Call NHL API to get lucky number"""
+    if "user_id" not in session:
+        access = {"access": "Please log in to access this feature"}
+        return jsonify(access)
+    else:
+        res_teams = requests.get(f"{API_BASE_URL}/teams")
+        teams_data = res_teams.json()
+        return jsonify(teams_data)
 
-    res_teams = requests.get(f"{API_BASE_URL}/teams")
-    teams_data = res_teams.json()
-    return jsonify(teams_data)
 
-
-@app.route('/api/teams/<int:id>', methods=["GET"])
-def get_specified_team(id):
+@app.route('/api/teams/<int:team_id>', methods=["GET"])
+def get_specified_team(team_id):
     """Call data for specific team by team id"""
+    if "user_id" not in session:
+        access = {"access": "Please log in to access this feature"}
+        return jsonify(access)
 
-    res_team = requests.get(f"{API_BASE_URL}/teams/{id}")
-    team_data = res_team.json()
-    return jsonify(team_data)
+    else:
+        res_team = requests.get(f"{API_BASE_URL}/teams/{team_id}?expand=team.stats")
+        team_data = res_team.json()
+        return jsonify(team_data)
 
 
-@app.route('/api/register', methods=["POST"])
+@app.route('/api/users/register', methods=["POST"])
 def register():
     """Register a user:  receive JSON form data and submit to DB"""
     
@@ -56,11 +63,15 @@ def register():
         password = request.json["password"]
 
         user = User.register(username, password)
-
         db.session.add(user)
         db.session.commit()
 
+        prefs = Preference(user_id=user.id)
+        db.session.add(prefs)
+        db.session.commit()
+
         session['username'] = user.username
+        session['user_id'] = user.id
 
         success['success'] = 'True'
     
@@ -70,7 +81,7 @@ def register():
         return jsonify(success)
 
     
-@app.route('/api/login', methods=["POST"])
+@app.route('/api/users/login', methods=["POST"])
 def login():
     """Login a user: recieve JSON form data and authenticate username/password."""
 
@@ -85,6 +96,7 @@ def login():
         user = User.authenticate(username, password)
         if user: 
             session['username'] = user.username
+            session['user_id'] = user.id
             success['success'] = 'True'
 
             return jsonify(success)
@@ -93,8 +105,38 @@ def login():
         
             return jsonify(success)
 
-@app.route('/api/prefs', methods=["GET", "POST"])
-def prefs():
-    """Get user prefs on GET request, set user prefs on POST request"""
+@app.route('/api/users/logout', methods=["POST"])
+def logout():
+    """Log a user out.  Remove user id from session."""
 
-    
+    session.pop("username", None)
+    session.pop("user_id", None)
+    session.pop("fav_team", None)
+
+    logout = {"logout": "You have been logged out"}
+
+    return jsonify(logout)
+
+@app.route('/api/prefs/<int:user_id>', methods=["GET", "POST"])
+def prefs(user_id):
+    """Get user prefs on GET request"""
+
+    if "user_id" not in session or user_id != session['user_id']:
+        access = {"access": "Please log in to access this page"}
+        return jsonify(access)
+    else:
+        prefs = Preference.query.get_or_404(user_id)
+        form = PrefsForm()
+        if form.validate_on_submit():
+            new_fav_team_id = request.json["favTeamId"]
+            prefs.fav_team_id = new_fav_team_id
+            
+            db.session.commit()
+
+
+        
+        fav_team_id = prefs.fav_team_id
+        session['fav_team'] = fav_team_id
+        prefs = {"prefs":{"favTeam": f"{fav_team_id}"}}
+        return jsonify(prefs)
+

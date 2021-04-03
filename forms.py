@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, IntegerField
 from wtforms.validators import InputRequired
 
 class RegisterForm(FlaskForm):
@@ -13,3 +13,8 @@ class LoginForm(FlaskForm):
 
     username = StringField("username", validators=[InputRequired()])
     password = PasswordField("password", validators=[InputRequired()])
+
+class PrefsForm(FlaskForm):
+    """Form for settings user preferences"""
+
+    fav_team_id = int
