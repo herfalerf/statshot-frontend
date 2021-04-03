@@ -71,14 +71,10 @@ class PrefsModelTestCase(TestCase):
         db.session.add(u2)
         db.session.commit()
 
-     
-
         p2 = Preference(
             user_id = None,
             fav_team_id = 2
         )
-
-    
 
         db.session.add(p2)
         with self.assertRaises(exc.IntegrityError) as context:
