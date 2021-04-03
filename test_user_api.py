@@ -34,6 +34,9 @@ class UserAPITestCase(TestCase):
         db.session.rollback()
         return resp
 
+
+# Registration Tests
+
     def test_valid_register_response(self):
         """Test json response from valid user registration"""
         with self.client as c:
@@ -61,6 +64,28 @@ class UserAPITestCase(TestCase):
             resp = c.post('/api/users/register', json={
                                                 "username": None, 
                                                 "password": "validpass"})
+            
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn('False', str(json_data))
+    
+    def test_invalid_password_response(self):
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": ""})
+            
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn('False', str(json_data))
+    
+    def test_invalid_password_response(self):
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": None})
             
             json_data = resp.get_json()
 
