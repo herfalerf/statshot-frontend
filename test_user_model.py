@@ -65,3 +65,10 @@ class UserModelTestCase(TestCase):
         self.assertNotEqual(u_test.password, "regpasswordtest")
         # Bcrpt strings should start with $2b$
         self.assertTrue(u_test.password.startswith("$2b$"))
+
+    def test_invalid_username_register(self):
+        invalid = User.register(None, "regpasswordtest")
+        uid = 888
+        invalid.id = uid
+        with self.assertRaises(exc.IntegrityError) as context:
+            db.session.commit()
