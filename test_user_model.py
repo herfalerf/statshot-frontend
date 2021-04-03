@@ -19,7 +19,7 @@ class UserModelTestCase(TestCase):
         """Crease test client, add sample data"""
 
         db.drop_all()
-        db.creat_all()
+        db.create_all()
 
         u1 = User.register("test1", "passwordtest1")
         uid1 = 1111
@@ -38,3 +38,17 @@ class UserModelTestCase(TestCase):
         res = super().tearDown()
         db.session.rollback()
         return res
+    
+    def test_user_model(self):
+        """Test basic model functionality"""
+
+        u = User(
+            username="testuser",
+            password="HASHED_PASSWORD"
+        )
+
+        db.session.add(u)
+        db.session.commit()
+
+        self.assertEqual(u.username, "testuser")
+        self.assertEqual(self.u1.username, "test1")
