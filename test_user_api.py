@@ -202,3 +202,20 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp_login.status_code, 200)
             self.assertIn('False', str(json_data))
     
+    def test_user_in_session_on_login(self):
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+            session.pop("username", None)
+            session.pop("user_id", None)
+            session.pop("fav_team", None)
+
+            resp_login = c.post('/api/users/login', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+            
+            user = User.query.filter_by(username='validreg').first()
+
+            self.assertEqual(session['username'], user.username)
+            self.assertEqual(session['user_id'], user.id)
