@@ -44,3 +44,25 @@ class UserAPITestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn('True', str(json_data))
+
+    def test_invalid_username_response(self):
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": "", 
+                                                "password": "validpass"})
+            
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn('False', str(json_data))
+    
+    def test_none_username_response(self):
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": None, 
+                                                "password": "validpass"})
+            
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn('False', str(json_data))
