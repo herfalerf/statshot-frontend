@@ -52,3 +52,16 @@ class UserModelTestCase(TestCase):
 
         self.assertEqual(u.username, "testuser")
         self.assertEqual(self.u1.username, "test1")
+    
+    def test_valid_register(self):
+        u_test = User.register("regtest", "regpasswordtest")
+        uid = 999
+        u_test.id = uid
+        db.session.commit()
+
+        u_test = User.query.get(uid)
+        self.assertIsNotNone(u_test)
+        self.assertEqual(u_test.username, "regtest")
+        self.assertNotEqual(u_test.password, "regpasswordtest")
+        # Bcrpt strings should start with $2b$
+        self.assertTrue(u_test.password.startswith("$2b$"))
