@@ -219,3 +219,17 @@ class UserAPITestCase(TestCase):
 
             self.assertEqual(session['username'], user.username)
             self.assertEqual(session['user_id'], user.id)
+
+#Logout tests
+    
+    def test_user_logout_response(self):
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+            
+            resp_logout = c.post('/api/users/logout')
+            json_data = resp_logout.get_json()
+
+            self.assertEqual(resp_logout.status_code, 200)
+            self.assertIn('logout', str(json_data))
