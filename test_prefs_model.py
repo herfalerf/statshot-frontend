@@ -62,4 +62,42 @@ class PrefsModelTestCase(TestCase):
 
         self.assertEqual(ptest.fav_team_id, 2)
 
+    def test_no_user_id(self):
+        """Test for None value user id in prefs"""
 
+        u2 = User.register("testprefs", "prefsword")
+        uid2 = 222
+        u2.id = uid2
+        db.session.add(u2)
+        db.session.commit()
+
+     
+
+        p2 = Preference(
+            user_id = None,
+            fav_team_id = 2
+        )
+
+    
+
+        db.session.add(p2)
+        with self.assertRaises(exc.IntegrityError) as context:
+            db.session.commit()
+
+    def test_invalid_user_id(self):
+        """Test for invalid user id in prefs"""
+
+        u3 = User.register("testprefs", "prefsword")
+        uid3 = 333
+        u3.id = uid3
+        db.session.add(u3)
+        db.session.commit()
+
+        p3 = Preference(
+            user_id = 99999,
+            fav_team_id = 2
+        )
+
+        db.session.add(p3)
+        with self.assertRaises(exc.IntegrityError) as context:
+            db.session.commit()
