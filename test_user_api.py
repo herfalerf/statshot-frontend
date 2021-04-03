@@ -1,5 +1,5 @@
 """User API tests."""
-
+from flask import jsonify
 import os
 from unittest import TestCase
 from models import db, connect_db, User, Preference
@@ -33,4 +33,14 @@ class UserAPITestCase(TestCase):
         resp = super().tearDown()
         db.session.rollback()
         return resp
-        
+
+    def test_valid_register_response(self):
+        """Test json response from valid user registration"""
+        with self.client as c:
+            resp = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn('True', str(json_data))
