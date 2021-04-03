@@ -104,7 +104,10 @@ def login():
             success['success'] = 'False'
         
             return jsonify(success)
-
+    else:
+        success['success'] = 'False'
+        return jsonify(success)
+        
 @app.route('/api/users/logout', methods=["POST"])
 def logout():
     """Log a user out.  Remove user id from session."""

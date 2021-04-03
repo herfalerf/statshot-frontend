@@ -50,7 +50,7 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn('True', str(json_data))
 
-    def test_invalid_username_response(self):
+    def test_invalid_username_reg_response(self):
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "", 
@@ -61,7 +61,7 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn('False', str(json_data))
     
-    def test_none_username_response(self):
+    def test_none_username_reg_response(self):
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": None, 
@@ -72,7 +72,7 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn('False', str(json_data))
     
-    def test_invalid_password_response(self):
+    def test_invalid_password_reg_response(self):
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -83,7 +83,7 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn('False', str(json_data))
     
-    def test_invalid_password_response(self):
+    def test_invalid_password_reg_response(self):
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -125,3 +125,22 @@ class UserAPITestCase(TestCase):
             
             self.assertEqual(resp_login.status_code, 200)
             self.assertIn('True', str(json_data))
+    
+    def test_invalid_username_login_response(self):
+        with self.client as c:
+            resp_reg = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+            
+            session.pop("username", None)
+            session.pop("user_id", None)
+            session.pop("fav_team", None)
+
+            resp_login = c.post('/api/users/login', json={
+                                                "username": "", 
+                                                "password": "validpass"})
+
+            json_data = resp_login.get_json()
+
+            self.assertEqual(resp_login.status_code, 200)
+            self.assertIn('False', str(json_data))
