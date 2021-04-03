@@ -54,6 +54,7 @@ class UserModelTestCase(TestCase):
         self.assertEqual(self.u1.username, "test1")
     
     def test_valid_register(self):
+        """tests that a valid registration works"""
         u_test = User.register("regtest", "regpasswordtest")
         uid = 999
         u_test.id = uid
@@ -67,6 +68,7 @@ class UserModelTestCase(TestCase):
         self.assertTrue(u_test.password.startswith("$2b$"))
 
     def test_invalid_username_register(self):
+        """Tests that invalid username will not register"""
         invalid = User.register(None, "regpasswordtest")
         uid = 888
         invalid.id = uid
@@ -74,8 +76,11 @@ class UserModelTestCase(TestCase):
             db.session.commit()
     
     def test_invalid_password_signup(self):
+        """Tests that an invalid password will not register"""
         with self.assertRaises(ValueError) as context:
             User.register("passtest", None)
         
         with self.assertRaises(ValueError) as context:
             User.register("passtest", "")
+    
+    
