@@ -34,3 +34,14 @@ class ExtAPITestCase(TestCase):
 
             self.assertEqual(resp.status_code, 200)
             self.assertIn("'teamName': 'Stars'", str(json_data))
+    
+    def test_unauthorized_teams_response(self):
+        """Test that teams api call is not accessible by when not logged in"""
+
+        with self.client as c:
+            resp = c.get('api/teams')
+
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn('Please log in to access this feature', str(json_data))
