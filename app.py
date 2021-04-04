@@ -56,7 +56,7 @@ def get_specified_team(team_id):
 def register():
     """Register a user:  receive JSON form data and submit to DB"""
     
-    success = {}
+    success = {'user':{}}
     form = RegisterForm()
 
     if form.validate_on_submit():
@@ -75,11 +75,13 @@ def register():
         session['username'] = user.username
         session['user_id'] = user.id
 
-        success['success'] = 'True'
+        success['user']['login'] = 'True'
+        success['user']['username'] = user.username
+        success['user']['userId'] = user.id
     
         return jsonify(success)
     else:
-        success['success'] = 'False'
+        success['login'] = 'False'
         return jsonify(success)
 
     
@@ -87,7 +89,7 @@ def register():
 def login():
     """Login a user: recieve JSON form data and authenticate username/password."""
 
-    success = {}
+    success = {'user':{}}
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -99,15 +101,17 @@ def login():
         if user: 
             session['username'] = user.username
             session['user_id'] = user.id
-            success['success'] = 'True'
+            success['user']['login'] = 'True'
+            success['user']['username'] = user.username
+            success['user']['userId'] = user.id
 
             return jsonify(success)
         else:
-            success['success'] = 'False'
+            success['login'] = 'False'
         
             return jsonify(success)
     else:
-        success['success'] = 'False'
+        success['login'] = 'False'
         return jsonify(success)
 
 @app.route('/api/users/logout', methods=["POST"])
