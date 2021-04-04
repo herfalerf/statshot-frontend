@@ -62,3 +62,23 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn("'access': 'Please log in to access this page'", str(json_data))
             self.assertNotIn("'favTeam': '25'", str(json_data))
+
+    def test_no_user_set_prefs_response(self):
+        """Test json response when no user is logged in on prefs POST call"""
+
+        with self.client as c:
+            reg = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+
+            user = User.query.filter_by(username='validreg').first()
+           
+            logout = c.post('/api/users/logout')
+            
+            resp = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("'access': 'Please log in to access this page'", str(json_data))
+            self.assertNotIn("'favTeam': '25'", str(json_data))
