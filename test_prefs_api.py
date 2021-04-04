@@ -23,11 +23,6 @@ class UserAPITestCase(TestCase):
 
         self.client = app.test_client()
 
-        self.testuser = User.register(username="testuser",
-                                      password="testpass")
-        self.testuser_id = 9999
-        self.testuser.id = self.testuser_id
-
         db.session.commit()
 
     def tearDown(self):
@@ -36,4 +31,19 @@ class UserAPITestCase(TestCase):
         db.session.rollback()
         return resp
     
-    
+    def test_valid_set_prefs_response(self):
+        """Test json response from valid user prefs POST call"""
+
+        with self.client as c:
+            reg = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+
+            user = User.query.filter_by(username='validreg').first()
+            resp = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("'favTeam': '25'", str(json_data))
+            
