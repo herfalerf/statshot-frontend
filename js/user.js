@@ -21,6 +21,7 @@ async function signup(evt) {
 
 $signupForm.on("submit", signup);
 
+//helper function to save the current user information in local storage
 function saveUserCredentialsInLocalStorage() {
   if (currentUser) {
     localStorage.setItem("username", currentUser.username);
@@ -28,6 +29,7 @@ function saveUserCredentialsInLocalStorage() {
   }
 }
 
+//helper function to update the UI on user singup/login
 function updateUIOnUserLogin() {
   hidePageComponents();
   $graphs.show();
