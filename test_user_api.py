@@ -6,7 +6,7 @@ from models import db, connect_db, User, Preference
 
 os.environ['DATABASE_URL'] = "postgresql:///statshot_test"
 
-from app import app, API_BASE_URL
+from app import app
 
 db.create_all()
 
