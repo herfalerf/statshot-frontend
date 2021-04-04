@@ -1,3 +1,5 @@
+"use strict";
+
 function navLoginClick(evt) {
   hidePageComponents();
   $loginForm.show();
@@ -15,3 +17,7 @@ function navSignupClick(evt) {
 }
 
 $signupBtn.on("click", navSignupClick);
+
+function updateNavOnLogin() {
+  hidePageComponents();
+}
