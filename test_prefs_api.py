@@ -10,7 +10,7 @@ from app import app
 
 db.create_all()
 
-class UserAPITestCase(TestCase):
+class PrefsAPITestCase(TestCase):
     """Test API for prefs"""
 
     def setUp(self):
@@ -141,3 +141,37 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn("'access': 'Please log in to access this page'", str(json_data))
             self.assertNotIn("'favTeam': '25'", str(json_data))
+
+    def test_prefs_in_session_on_post(self):
+        """Test that user prefs are added to session on valid POST request"""
+        with self.client as c:
+            reg = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+
+            user = User.query.filter_by(username='validreg').first()
+            
+            resp = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            
+            prefs = Preference.query.get(user.id)
+
+            self.assertEqual(session['fav_team'], prefs.fav_team_id)
+    
+    def test_prefs_in_session_on_get(self):
+        """Test that user prefs are added to session on valid GET request"""
+        with self.client as c:
+            reg = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+
+            user = User.query.filter_by(username='validreg').first()
+            
+            set_prefs = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+
+            session.pop("fav_team", None)
+
+            resp = c.get(f'/api/prefs{user.id}')
+
+            prefs = Preference.query.get(user.id)
+
+            self.assertEqual(session['fav_team'], prefs.fav_team_id)
