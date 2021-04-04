@@ -4,10 +4,12 @@ from flask_debugtoolbar import DebugToolbarExtension
 from secrets import API_SECRET_KEY
 from forms import RegisterForm, LoginForm, PrefsForm
 from models import connect_db, db, User, Preference
+from flask_cors import CORS
 
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 API_BASE_URL = "https://statsapi.web.nhl.com/api/v1"
@@ -107,7 +109,7 @@ def login():
     else:
         success['success'] = 'False'
         return jsonify(success)
-        
+
 @app.route('/api/users/logout', methods=["POST"])
 def logout():
     """Log a user out.  Remove user id from session."""
