@@ -33,3 +33,4 @@ class ExtAPITestCase(TestCase):
             json_data = resp.get_json()
 
             self.assertEqual(resp.status_code, 200)
+            self.assertIn("'teamName': 'Stars'", str(json_data))
