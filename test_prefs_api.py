@@ -121,3 +121,23 @@ class UserAPITestCase(TestCase):
             self.assertIn("'access': 'Please log in to access this page'", str(json_data))
             self.assertNotIn("'favTeam': '25'", str(json_data))
 
+    def test_no_user_get_prefs(self):
+        """Test user prefs GET request with no user"""
+        with self.client as c:
+            reg = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+            
+            user = User.query.filter_by(username='validreg').first()
+
+            set_prefs = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+           
+            logout = c.post('/api/users/logout')
+            
+            resp = c.get(f'/api/prefs/{user.id}')
+            
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("'access': 'Please log in to access this page'", str(json_data))
+            self.assertNotIn("'favTeam': '25'", str(json_data))
