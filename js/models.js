@@ -8,11 +8,12 @@ class User {
    *   - token
    */
 
-  constructor({ username, favTeamId }) {
+  constructor({ username, userId, favTeamId }) {
     this.username = username;
+    this.userId = userId;
 
     // instantiate Story instances for the user's favorites and ownStories
-    this.favTeamId = Null;
+    // this.favTeamId = Null;
   }
 
   /** Register new user in API, make User instance & return it.
@@ -23,14 +24,13 @@ class User {
    */
 
   static async signup(username, password) {
-    const response = await axios({
-      url: `${BASE_URL}/api/users/register`,
-      method: "POST",
-      data: { username: username, password: password },
+    const response = await axios.post(`${BASE_URL}/api/users/register`, {
+      username,
+      password,
     });
 
     //////////////////////////////////
     //This functionality was broken on the original file, but the instructions said it was supposed to be working from the start
-    return new User(response.data.user, response.data.token);
+    return new User(response.data.user);
   }
 }
