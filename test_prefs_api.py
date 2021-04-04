@@ -175,3 +175,18 @@ class PrefsAPITestCase(TestCase):
             prefs = Preference.query.get(user.id)
 
             self.assertEqual(session['fav_team'], prefs.fav_team_id)
+
+    def test_no_prefs_in_session_on_logout(self):
+        """Test that user prefs are removed from session on logout"""
+        with self.client as c:
+            reg = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+
+            user = User.query.filter_by(username='validreg').first()
+            
+            set_prefs = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+
+            prefs = Preference.query.get(user.id)
+
+            self.assertNotIn(str(session), 'fav_team')
