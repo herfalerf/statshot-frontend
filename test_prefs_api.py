@@ -47,3 +47,18 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn("'favTeam': '25'", str(json_data))
             
+    def test_unauthorized_user_set_prefs_response(self):
+        """Test json response from unathorized user prefs POST call"""
+
+        with self.client as c:
+            reg = c.post('/api/users/register', json={  
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+
+            resp = c.post('/api/prefs/9999', json={"favTeamId": 25})
+
+            json_data = resp.get_json()
+
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn("'access': 'Please log in to access this page'", str(json_data))
+            self.assertNotIn("'favTeam': '25'", str(json_data))
