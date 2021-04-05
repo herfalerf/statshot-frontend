@@ -75,13 +75,13 @@ def register():
         session['username'] = user.username
         session['user_id'] = user.id
 
-        success['user']['login'] = 'True'
+        success['user']['login'] = True
         success['user']['username'] = user.username
         success['user']['userId'] = user.id
     
         return jsonify(success)
     else:
-        success['login'] = 'False'
+        success['login'] = False
         return jsonify(success)
 
     
@@ -101,17 +101,17 @@ def login():
         if user: 
             session['username'] = user.username
             session['user_id'] = user.id
-            success['user']['login'] = 'True'
+            success['user']['login'] = True
             success['user']['username'] = user.username
             success['user']['userId'] = user.id
 
             return jsonify(success)
         else:
-            success['login'] = 'False'
+            success['login'] = False
         
             return jsonify(success)
     else:
-        success['login'] = 'False'
+        success['login'] = False
         return jsonify(success)
 
 @app.route('/api/users/logout', methods=["POST"])
