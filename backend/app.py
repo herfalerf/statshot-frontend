@@ -149,3 +149,20 @@ def prefs(user_id):
         prefs = {"prefs":{"favTeam": f"{fav_team_id}"}}
         return jsonify(prefs)
 
+@app.route('/api/users/session', methods=["GET"])
+def check_session():
+    """Check if a user is stored in the session, return user information if so"""
+
+    resp = {'user':{}}
+
+    if "user_id" not in session :
+        resp['user']['login'] = False
+
+        return jsonify(resp)
+    else:
+        resp['user']['login'] = True 
+        resp['user']['username'] = session['username']
+        resp['user']['userId'] = session['user_id']
+
+        return jsonify(resp)
+

@@ -51,6 +51,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('True', str(json_data))
 
     def test_invalid_username_reg_response(self):
+        """Test json response from invalid username on reg"""
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "", 
@@ -62,6 +63,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('False', str(json_data))
     
     def test_none_username_reg_response(self):
+        """Test json response from no username on reg"""
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": None, 
@@ -73,6 +75,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('False', str(json_data))
     
     def test_invalid_password_reg_response(self):
+        """test json response from invalid password on reg"""
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -83,7 +86,8 @@ class UserAPITestCase(TestCase):
             self.assertEqual(resp.status_code, 200)
             self.assertIn('False', str(json_data))
     
-    def test_invalid_password_reg_response(self):
+    def test_none_password_reg_response(self):
+        """Test json response from no password on reg"""
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -95,6 +99,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('False', str(json_data))
     
     def test_user_in_session_on_reg(self):
+        """Test that user is in session after reg"""
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -108,6 +113,7 @@ class UserAPITestCase(TestCase):
 #Login Tests
 
     def test_valid_login_response(self):
+        """Test json response on valid user login"""
         with self.client as c:
             resp_reg = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -127,6 +133,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('True', str(json_data))
     
     def test_invalid_username_login_response(self):
+        """Test invalid username on login"""
         with self.client as c:
             resp_reg = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -146,6 +153,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('False', str(json_data))
     
     def test_none_username_login_response(self):
+        """Test no username on login"""
         with self.client as c:
             resp_reg = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -165,6 +173,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('False', str(json_data))
     
     def test_invalid_password_login_response(self):
+        """Test invalid password on login"""
         with self.client as c:
             resp_reg = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -184,6 +193,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('False', str(json_data))
     
     def test_none_password_login_response(self):
+        """Test no password on login"""
         with self.client as c:
             resp_reg = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -203,6 +213,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('False', str(json_data))
     
     def test_user_in_session_on_login(self):
+        """Test user in session valid login"""
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -223,6 +234,7 @@ class UserAPITestCase(TestCase):
 #Logout tests
     
     def test_user_logout_response(self):
+        """Test json response on logout"""
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -235,6 +247,7 @@ class UserAPITestCase(TestCase):
             self.assertIn('logout', str(json_data))
 
     def test_user_not_in_session_on_logout(self):
+        """Test that user no in session on logout"""
         with self.client as c:
             resp = c.post('/api/users/register', json={
                                                 "username": "validreg", 
@@ -244,3 +257,28 @@ class UserAPITestCase(TestCase):
 
             self.assertNotIn(str(session), 'username')
             self.assertNotIn(str(session), 'user_id')
+    
+    def test_logged_in_user_session_route(self):
+        """Test that json response from session route while user is logged in"""
+        with self.client as c:
+            reg = c.post('/api/users/register', json={
+                                                "username": "validreg", 
+                                                "password": "validpass"})
+
+            resp_sess = c.get('/api/users/session')
+
+            json_data = resp_sess.get_json()
+
+            self.assertEqual(resp_sess.status_code, 200)
+            self.assertIn("validreg", str(json_data))
+
+    def test_no_user_session_route(self):
+        """Test json response from session route while no user is logged in"""
+        with self.client as c:
+            
+            resp_sess = c.get('/api/users/session')
+
+            json_data = resp_sess.get_json()
+
+            self.assertEqual(resp_sess.status_code, 200)
+            self.assertIn("False", str(json_data))
