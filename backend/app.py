@@ -4,12 +4,18 @@ from flask_debugtoolbar import DebugToolbarExtension
 from secrets import API_SECRET_KEY
 from forms import RegisterForm, LoginForm, PrefsForm
 from models import connect_db, db, User, Preference
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 
 
 
 app = Flask(__name__)
-CORS(app)
+cors = CORS(
+    app,
+    resources={r"*": {"origins": "http://127.0.0.1:5050"}},
+    expose_headers=["Content-Type", "X-CSRFToken"],
+    supports_credentials=True,
+)
+
 
 
 API_BASE_URL = "https://statsapi.web.nhl.com/api/v1"
@@ -19,6 +25,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = API_SECRET_KEY
 app.config['WTF_CSRF_ENABLED'] = False
+app.config['SESSION_COOKIE_SAMESITE'] = "Lax"
 
 debug = DebugToolbarExtension(app)
 
@@ -28,6 +35,7 @@ connect_db(app)
 
 
 @app.route('/api/teams', methods=["GET"])
+@cross_origin()
 def get_teams():
     """Call NHL API to get lucky number"""
     if "user_id" not in session:
@@ -40,6 +48,7 @@ def get_teams():
 
 
 @app.route('/api/teams/<int:team_id>', methods=["GET"])
+@cross_origin()
 def get_specified_team(team_id):
     """Call data for specific team by team id"""
     if "user_id" not in session:
@@ -53,6 +62,7 @@ def get_specified_team(team_id):
 
 
 @app.route('/api/users/register', methods=["POST"])
+@cross_origin()
 def register():
     """Register a user:  receive JSON form data and submit to DB"""
     
@@ -86,6 +96,7 @@ def register():
 
     
 @app.route('/api/users/login', methods=["POST"])
+@cross_origin()
 def login():
     """Login a user: recieve JSON form data and authenticate username/password."""
 
@@ -115,6 +126,7 @@ def login():
         return jsonify(success)
 
 @app.route('/api/users/logout', methods=["POST"])
+@cross_origin()
 def logout():
     """Log a user out.  Remove user id from session."""
 
@@ -127,6 +139,7 @@ def logout():
     return jsonify(logout)
 
 @app.route('/api/prefs/<int:user_id>', methods=["GET", "POST"])
+@cross_origin
 def prefs(user_id):
     """Get user prefs on GET request"""
 
@@ -150,19 +163,24 @@ def prefs(user_id):
         return jsonify(prefs)
 
 @app.route('/api/users/session', methods=["GET"])
+@cross_origin(supports_credentials=True)
 def check_session():
     """Check if a user is stored in the session, return user information if so"""
 
-    resp = {'user':{}}
+    success = {'user':{}}
 
     if "user_id" not in session :
-        resp['user']['login'] = False
-
-        return jsonify(resp)
+        success['user']['login'] = False
+      
+        
+        return jsonify(success)
     else:
-        resp['user']['login'] = True 
-        resp['user']['username'] = session['username']
-        resp['user']['userId'] = session['user_id']
+        success['user']['login'] = True 
+        success['user']['username'] = session['username']
+        success['user']['userId'] = session['user_id']
+        
+    
 
-        return jsonify(resp)
+        
+        return jsonify(success)
 
