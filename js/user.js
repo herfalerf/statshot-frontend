@@ -3,6 +3,14 @@
 //variable to hold the currently-logged-in user
 let currentUser;
 
+$(document).ready(function () {
+  checkForUser();
+});
+
+async function checkForUser() {
+  currentUser = await User.checkSession();
+}
+
 async function signup(evt) {
   evt.preventDefault();
 
@@ -12,6 +20,7 @@ async function signup(evt) {
   console.log(password);
 
   currentUser = await User.signup(username, password);
+  console.log(currentUser);
 
   $signupForm.trigger("reset");
 

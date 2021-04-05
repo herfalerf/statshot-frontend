@@ -1,4 +1,3 @@
-const $body = $("body");
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
 const $loginBtn = $("#login-button");

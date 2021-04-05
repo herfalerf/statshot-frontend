@@ -28,9 +28,23 @@ class User {
       username,
       password,
     });
-
+    console.log(`this is the signup ${response}`);
     //////////////////////////////////
     //This functionality was broken on the original file, but the instructions said it was supposed to be working from the start
-    return new User(response.data.user);
+    let new_user = new User(response.data.user);
+    console.log(`this is a new user from signup`, new_user);
+    return new_user;
+  }
+
+  static async checkSession() {
+    const response = await axios({
+      method: "get",
+      url: `${BASE_URL}/api/users/session`,
+      withCredentials: true,
+    });
+
+    let sess_user = new User(response.data.user);
+    console.log(`this is a session user`, sess_user);
+    return sess_user;
   }
 }
