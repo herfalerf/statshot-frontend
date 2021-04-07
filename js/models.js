@@ -24,7 +24,7 @@ class User {
    */
 
   static async signup(username, password) {
-    const response = await axios.post(`${BASE_URL}/api/users/register`, {
+    let response = await axios.post(`${BASE_URL}/api/users/register`, {
       username,
       password,
     });
@@ -37,10 +37,14 @@ class User {
   }
 
   static async login(username, password) {
-    const response = await axios.post(`${BASE_URL}/api/users/login`, {
-      username,
-      password,
-    });
+    let response = await axios.post(
+      `${BASE_URL}/api/users/login`,
+      {
+        username,
+        password,
+      },
+      { withCredentials: true }
+    );
     console.log(`this is the login ${response}`);
     //////////////////////////////////
     //This functionality was broken on the original file, but the instructions said it was supposed to be working from the start
@@ -50,7 +54,7 @@ class User {
   }
 
   static async checkSession() {
-    const response = await axios({
+    let response = await axios({
       method: "get",
       url: `${BASE_URL}/api/users/session`,
       withCredentials: true,
@@ -61,8 +65,16 @@ class User {
     return sessUser;
   }
 
+  static async testSession() {
+    let response = await axios.get(`${BASE_URL}/api/users/session`, {
+      withCredentials: true,
+    });
+    let testSess = response.data;
+    return testSess;
+  }
+
   static async logout() {
-    const response = await axios({
+    let response = await axios({
       method: "post",
       url: `${BASE_URL}/api/users/logout`,
       withCredentials: true,

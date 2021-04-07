@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, session
 import requests
 from flask_debugtoolbar import DebugToolbarExtension
-# from secrets import API_SECRET_KEY
+from secrets import API_SECRET_KEY
 from forms import RegisterForm, LoginForm, PrefsForm
 from models import connect_db, db, User, Preference
 from flask_cors import CORS, cross_origin
@@ -9,12 +9,12 @@ from flask_cors import CORS, cross_origin
 
 
 app = Flask(__name__)
-# cors = CORS(
-#     app,
-#     resources={r"*": {"origins": "http://127.0.0.1:5050"}},
-#     expose_headers=["Content-Type", "X-CSRFToken"],
-#     supports_credentials=True,
-# )
+cors = CORS(
+    app,
+    resources={r"*": {"origins": "http://localhost"}},
+    expose_headers=["Content-Type", "X-CSRFToken"],
+    supports_credentials=True,
+)
 
 
 
@@ -23,7 +23,7 @@ API_BASE_URL = "https://statsapi.web.nhl.com/api/v1"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///statshot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = "thisisnotsecure"
+app.config['SECRET_KEY'] = API_SECRET_KEY
 app.config['WTF_CSRF_ENABLED'] = False
 app.config['SESSION_COOKIE_SAMESITE'] = "None"
 
@@ -62,7 +62,7 @@ def get_specified_team(team_id):
 
 
 @app.route('/api/users/register', methods=["POST"])
-@cross_origin(origin='localhost', supports_credentials=True)
+@cross_origin(origin='http://localhost', supports_credentials=True)
 def register():
     """Register a user:  receive JSON form data and submit to DB"""
     
@@ -168,7 +168,7 @@ def prefs(user_id):
         prefs = {"prefs":{"favTeam": f"{fav_team_id}"}}
         return jsonify(prefs)
 
-@app.route('/api/users/session', methods=["GET"])
+@app.route('/api/users/session')
 @cross_origin(origin='localhost', supports_credentials=True)
 def check_session():
     """Check if a user is stored in the session, return user information if so"""
