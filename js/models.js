@@ -1,6 +1,6 @@
 "use strict";
 
-const BASE_URL = "http://127.0.0.1:5000";
+const BASE_URL = "http://localhost:5000";
 
 class User {
   /** Make user instance from obj of user data and a token:
@@ -31,9 +31,22 @@ class User {
     console.log(`this is the signup ${response}`);
     //////////////////////////////////
     //This functionality was broken on the original file, but the instructions said it was supposed to be working from the start
-    let new_user = new User(response.data.user);
-    console.log(`this is a new user from signup`, new_user);
-    return new_user;
+    let newUser = new User(response.data.user);
+    console.log(`this is a new user from signup`, newUser);
+    return newUser;
+  }
+
+  static async login(username, password) {
+    const response = await axios.post(`${BASE_URL}/api/users/login`, {
+      username,
+      password,
+    });
+    console.log(`this is the login ${response}`);
+    //////////////////////////////////
+    //This functionality was broken on the original file, but the instructions said it was supposed to be working from the start
+    let returnUser = new User(response.data.user);
+    console.log(`this is a new user from signup`, returnUser);
+    return returnUser;
   }
 
   static async checkSession() {
@@ -43,8 +56,18 @@ class User {
       withCredentials: true,
     });
 
-    let sess_user = new User(response.data.user);
-    console.log(`this is a session user`, sess_user);
-    return sess_user;
+    let sessUser = new User(response.data.user);
+    console.log(`this is a session user`, sessUser);
+    return sessUser;
+  }
+
+  static async logout() {
+    const response = await axios({
+      method: "post",
+      url: `${BASE_URL}/api/users/logout`,
+      withCredentials: true,
+    });
+    console.log(response.data);
+    return response;
   }
 }

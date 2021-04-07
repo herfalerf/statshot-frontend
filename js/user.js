@@ -30,6 +30,25 @@ async function signup(evt) {
 
 $signupForm.on("submit", signup);
 
+async function login(evt) {
+  evt.preventDefault();
+
+  const username = $("#login-username").val();
+  console.log(username);
+  const password = $("#login-password").val();
+  console.log(password);
+
+  currentUser = await User.login(username, password);
+  console.log(currentUser);
+
+  $loginForm.trigger("reset");
+
+  saveUserCredentialsInLocalStorage();
+  updateUIOnUserLogin();
+}
+
+$loginForm.on("submit", login);
+
 //helper function to save the current user information in local storage
 function saveUserCredentialsInLocalStorage() {
   if (currentUser) {
