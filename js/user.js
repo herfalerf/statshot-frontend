@@ -50,12 +50,12 @@ async function login(evt) {
 $loginForm.on("submit", login);
 
 //helper function to save the current user information in local storage
-function saveUserCredentialsInLocalStorage() {
-  if (currentUser) {
-    localStorage.setItem("username", currentUser.username);
-    localStorage.setItem("userId", currentUser.userId);
-  }
-}
+// function saveUserCredentialsInLocalStorage() {
+//   if (currentUser) {
+//     localStorage.setItem("username", currentUser.username);
+//     localStorage.setItem("userId", currentUser.userId);
+//   }
+// }
 
 //helper function to update the UI on user singup/login
 function updateUIOnUserLogin() {

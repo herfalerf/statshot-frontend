@@ -23,9 +23,10 @@ API_BASE_URL = "https://statsapi.web.nhl.com/api/v1"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///statshot_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = "thisisnotsecure"
+app.config['SECRET_KEY'] = "newsession"
 app.config['WTF_CSRF_ENABLED'] = False
 app.config['SESSION_COOKIE_SAMESITE'] = "None"
+app.config['SESSION_COOKIE_SECURE'] = True
 
 debug = DebugToolbarExtension(app)
 
@@ -136,13 +137,11 @@ def logout():
 
     logout = {"logout": "You have been logged out"}
 
-    resp = {'session':{}}
-    for item in session:
-        resp['session'] = item
+    # resp = session['username']
 
-    return jsonify(resp)
+    # return resp;
 
-    # return jsonify(logout)
+    return jsonify(logout)
 
 @app.route('/api/prefs/<int:user_id>', methods=["GET", "POST"])
 @cross_origin(origin='localhost', supports_credentials=True)
@@ -190,9 +189,8 @@ def check_session():
 @cross_origin(origin='localhost', supports_credentials=True)
 def ping():
 
-    resp = {'session':{}}
-    for item in session:
-        resp['session'] = item
+    resp = session['username']
+    
 
     return resp
 
