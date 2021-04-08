@@ -134,6 +134,7 @@ def logout():
     session.pop("username", None)
     session.pop("user_id", None)
     session.pop("fav_team", None)
+    session['test'] = 'test'
 
     logout = {"logout": "You have been logged out"}
 
