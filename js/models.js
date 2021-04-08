@@ -24,10 +24,14 @@ class User {
    */
 
   static async signup(username, password) {
-    let response = await axios.post(`${BASE_URL}/api/users/register`, {
-      username,
-      password,
-    });
+    let response = await axios.post(
+      `${BASE_URL}/api/users/register`,
+      {
+        username,
+        password,
+      },
+      { withCredentials: true }
+    );
     console.log(`this is the signup ${response}`);
     //////////////////////////////////
     //This functionality was broken on the original file, but the instructions said it was supposed to be working from the start
