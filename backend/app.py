@@ -127,7 +127,7 @@ def login():
         return jsonify(success)
 
 @app.route('/api/users/logout', methods=["POST"])
-@cross_origin(origin='localhost', supports_credentials=True)
+@cross_origin( supports_credentials=True)
 def logout():
     """Log a user out.  Remove user id from session."""
 

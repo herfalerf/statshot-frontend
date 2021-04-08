@@ -79,7 +79,7 @@ class User {
       url: `${BASE_URL}/api/users/logout`,
       withCredentials: true,
     });
-    User.testSession();
+
     console.log(response.data);
     return response;
   }
