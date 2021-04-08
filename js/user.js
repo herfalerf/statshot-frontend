@@ -12,6 +12,9 @@ $(document).ready(async function () {
     $graphs.show();
   } else {
     console.log("No user is logged in");
+    $welcome.show();
+    $loginBtn.show();
+    $signupBtn.show();
   }
 
   console.log(currentUser);
