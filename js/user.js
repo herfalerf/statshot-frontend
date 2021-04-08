@@ -5,6 +5,11 @@ let currentUser;
 
 $(document).ready(async function () {
   currentUser = await checkForUser();
+  if (currentUser.userId !== undefined) {
+    console.log(`User ${currentUser.username} is logged in`);
+  } else {
+    console.log("No user is logged in");
+  }
 
   console.log(currentUser);
 });
