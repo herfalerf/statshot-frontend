@@ -169,7 +169,7 @@ def prefs(user_id):
         return jsonify(prefs)
 
 @app.route('/api/users/session')
-@cross_origin( supports_credentials=True)
+@cross_origin(origin='localhost', supports_credentials=True)
 def check_session():
     """Check if a user is stored in the session, return user information if so"""
 
