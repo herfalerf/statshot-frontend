@@ -4,6 +4,7 @@ const $loginBtn = $("#login-button");
 const $signupBtn = $("#signup-button");
 const $graphs = $("#graphs");
 const $welcome = $("#welcome");
+const $logout = $("#logout-button");
 
 function hidePageComponents() {
   const components = [
@@ -13,6 +14,7 @@ function hidePageComponents() {
     $signupBtn,
     $graphs,
     $welcome,
+    $logout,
   ];
   components.forEach((c) => c.hide());
 }

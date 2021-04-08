@@ -8,8 +8,7 @@ $(document).ready(async function () {
   currentUser = await checkForUser();
   if (currentUser.userId !== undefined) {
     console.log(`User ${currentUser.username} is logged in`);
-
-    $graphs.show();
+    updateUIOnUserLogin();
   } else {
     console.log("No user is logged in");
     $welcome.show();
@@ -75,4 +74,5 @@ function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
   hidePageComponents();
   $graphs.show();
+  $logout.show();
 }
