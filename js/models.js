@@ -24,13 +24,13 @@ class User {
    */
 
   static async signup(username, password) {
-    const response = await axios.post(
+    let response = await axios.post(
       `${BASE_URL}/api/users/register`,
       {
         username,
         password,
       },
-      { withCredentails: true }
+      { withCredentials: true }
     );
     console.log(`this is the signup ${response}`);
     //////////////////////////////////
@@ -41,15 +41,15 @@ class User {
   }
 
   static async login(username, password) {
-    const response = await axios.post(
+    let response = await axios.post(
       `${BASE_URL}/api/users/login`,
       {
         username,
         password,
       },
-      { withCredentails: true }
+      { withCredentials: true }
     );
-    console.log(response);
+    console.log(`this is the login ${response}`);
     //////////////////////////////////
     //This functionality was broken on the original file, but the instructions said it was supposed to be working from the start
     let returnUser = new User(response.data.user);
@@ -58,7 +58,7 @@ class User {
   }
 
   static async checkSession() {
-    const response = await axios({
+    let response = await axios({
       method: "get",
       url: `${BASE_URL}/api/users/session`,
       withCredentials: true,
@@ -71,28 +71,21 @@ class User {
     return sessUser;
   }
 
-  // static async checkSession() {
-  //   const response = await axios.get(
-  //     `${BASE_URL}/api/users/session`,
-  //     {},
-  //     {
-  //       withCredentails: true,
-  //     }
-  //   );
-
-  //   console.log(response.data);
-
-  //   let sessUser = new User(response.data.user);
-
-  //   return sessUser;
-  // }
+  static async testSession() {
+    let response = await axios.get(`${BASE_URL}/api/users/session`, {
+      withCredentials: true,
+    });
+    let testSess = response.data.user;
+    return testSess;
+  }
 
   static async logout() {
-    const response = await axios({
+    let response = await axios({
       method: "post",
       url: `${BASE_URL}/api/users/logout`,
       // withCredentials: true,
     });
+
     console.log(response.data);
     return response;
   }
