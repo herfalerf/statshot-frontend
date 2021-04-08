@@ -4,9 +4,12 @@
 let currentUser;
 
 $(document).ready(async function () {
+  hidePageComponents();
   currentUser = await checkForUser();
   if (currentUser.userId !== undefined) {
     console.log(`User ${currentUser.username} is logged in`);
+
+    $graphs.show();
   } else {
     console.log("No user is logged in");
   }
