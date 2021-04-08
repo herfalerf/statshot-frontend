@@ -26,6 +26,7 @@ app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = API_SECRET_KEY
 app.config['WTF_CSRF_ENABLED'] = False
 app.config['SESSION_COOKIE_SAMESITE'] = "None"
+app.config['SESSION_COOKIE_SECURE'] = True
 
 debug = DebugToolbarExtension(app)
 
@@ -169,7 +170,7 @@ def prefs(user_id):
         return jsonify(prefs)
 
 @app.route('/api/users/session')
-@cross_origin(origin='localhost', supports_credentials=True)
+@cross_origin( supports_credentials=True)
 def check_session():
     """Check if a user is stored in the session, return user information if so"""
 

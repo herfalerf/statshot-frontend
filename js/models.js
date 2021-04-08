@@ -61,7 +61,7 @@ class User {
     });
 
     let sessUser = new User(response.data.user);
-    console.log(`this is a session user`, sessUser);
+
     return sessUser;
   }
 
@@ -69,7 +69,7 @@ class User {
     let response = await axios.get(`${BASE_URL}/api/users/session`, {
       withCredentials: true,
     });
-    let testSess = response.data;
+    let testSess = response.data.user;
     return testSess;
   }
 
@@ -79,6 +79,7 @@ class User {
       url: `${BASE_URL}/api/users/logout`,
       withCredentials: true,
     });
+    User.testSession();
     console.log(response.data);
     return response;
   }
