@@ -3,12 +3,15 @@
 //variable to hold the currently-logged-in user
 let currentUser;
 
-$(document).ready(function () {
-  checkForUser();
+$(document).ready(async function () {
+  currentUser = await checkForUser();
+
+  console.log(currentUser);
 });
 
 async function checkForUser() {
-  currentUser = await User.checkSession();
+  let sessionUser = await User.checkSession();
+  return sessionUser;
 }
 
 async function signup(evt) {
