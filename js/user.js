@@ -75,4 +75,6 @@ function updateUIOnUserLogin() {
   hidePageComponents();
   $graphs.show();
   $logout.show();
+  $userBtn.text(`Profile (${currentUser.username})`);
+  $userBtn.show();
 }
