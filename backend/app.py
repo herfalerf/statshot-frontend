@@ -146,7 +146,7 @@ def logout():
 
     # return jsonify(logout)
 
-@app.route('/api/prefs/<int:user_id>', methods=["GET", "POST"])
+@app.route('/api/users/<int:user_id>/prefs', methods=["GET", "POST"])
 @cross_origin(origin='localhost', supports_credentials=True)
 def prefs(user_id):
     """Get user prefs on GET request"""
