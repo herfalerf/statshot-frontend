@@ -62,6 +62,17 @@ async function login(evt) {
 
 $loginForm.on("submit", login);
 
+async function logout(evt) {
+  evt.preventDefault();
+
+  await User.logout();
+  hidePageComponents();
+  $goodbye.show();
+  $loginBtn.show();
+  $signupBtn.show();
+}
+
+$logoutBtn.on("click", logout);
 //helper function to save the current user information in local storage
 function saveUserCredentialsInLocalStorage() {
   if (currentUser) {
@@ -74,7 +85,7 @@ function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
   hidePageComponents();
   $graphs.show();
-  $logout.show();
+  $logoutBtn.show();
   $userBtn.text(`Profile (${currentUser.username})`);
   $userBtn.show();
 }
