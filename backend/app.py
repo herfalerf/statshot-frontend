@@ -103,7 +103,7 @@ def register():
 
     
 @app.route('/api/users/login', methods=["POST"])
-@cross_origin( supports_credentials=True)
+@cross_origin(origin='localhost', supports_credentials=True)
 def login():
     """Login a user: recieve JSON form data and authenticate username/password."""
 
