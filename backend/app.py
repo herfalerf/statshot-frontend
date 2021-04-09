@@ -92,14 +92,15 @@ def register():
             success['user']['username'] = session['username']
             success['user']['userId'] = session['user_id']
     
-            return jsonify(success)
+            return jsonify(success), 201
         except exc.IntegrityError:
             db.session.rollback()
             success['login'] = False
-        return jsonify(success)
+            success['message'] = "That username is already taken"
+        return jsonify(success), 403
     else:
         success['login'] = False
-        return jsonify(success)
+        return jsonify(success), 403
 
     
 @app.route('/api/users/login', methods=["POST"])
@@ -126,11 +127,13 @@ def login():
             return jsonify(success)
         else:
             success['login'] = False
+            success['message'] = "The username/password is incorrect"
         
-            return jsonify(success)
+            return jsonify(success), 403
     else:
         success['login'] = False
-        return jsonify(success)
+        success['message'] = "The username/password is incorrect"
+        return jsonify(success), 403
 
 @app.route('/api/users/logout', methods=["POST"])
 @cross_origin(origin='http://localhost', supports_credentials=True)
