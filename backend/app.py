@@ -5,6 +5,7 @@ from secrets import API_SECRET_KEY
 from forms import RegisterForm, LoginForm, PrefsForm
 from models import connect_db, db, User, Preference
 from flask_cors import CORS, cross_origin
+from sqlalchemy import exc
 
 
 
@@ -75,21 +76,26 @@ def register():
         username = request.json["username"]
         password = request.json["password"]
 
-        user = User.register(username, password)
-        db.session.add(user)
-        db.session.commit()
+        try:
+            user = User.register(username, password)
+            db.session.add(user)
+            db.session.commit()
 
-        prefs = Preference(user_id=user.id)
-        db.session.add(prefs)
-        db.session.commit()
+            prefs = Preference(user_id=user.id)
+            db.session.add(prefs)
+            db.session.commit()
+        
+            session['username'] = user.username
+            session['user_id'] = user.id
 
-        session['username'] = user.username
-        session['user_id'] = user.id
-
-        success['user']['login'] = True
-        success['user']['username'] = session['username']
-        success['user']['userId'] = session['user_id']
+            success['user']['login'] = True
+            success['user']['username'] = session['username']
+            success['user']['userId'] = session['user_id']
     
+            return jsonify(success)
+        except exc.IntegrityError:
+            db.session.rollback()
+            success['login'] = False
         return jsonify(success)
     else:
         success['login'] = False
