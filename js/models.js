@@ -75,9 +75,34 @@ class User {
 
 // Setup Team class and related functions
 class Team {
-  constructor({ name, id }) {
+  constructor({
+    name,
+    id,
+    wins,
+    losses,
+    ot,
+    pts,
+    gamesPlayed,
+    goalsPerGame,
+    goalsAgainstPerGame,
+    savePctg,
+    powerPlayGoals,
+    powerPlayGoalsAgainst,
+    powerPlayOpportunities,
+  }) {
     this.name = name;
     this.id = id;
+    this.wins = wins;
+    this.losses = losses;
+    this.ot = ot;
+    this.pts = pts;
+    this.gamesPlayed = gamesPlayed;
+    this.goalsPerGame = goalsPerGame;
+    this.goalsAgainstPerGame = goalsAgainstPerGame;
+    this.savePctg = savePctg;
+    this.powerPlayGoals = powerPlayGoals;
+    this.powerPlayGoalsAgainst = powerPlayGoalsAgainst;
+    this.powerPlayOpportunities = powerPlayOpportunities;
   }
 
   static async getTeams() {
