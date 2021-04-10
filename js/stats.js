@@ -1,6 +1,5 @@
 async function generateTeamsList() {
   teamsObj = await Team.getTeams();
-  console.log(teamsObj);
 
   for (let team in teamsObj) {
     let tId;
@@ -13,14 +12,10 @@ async function generateTeamsList() {
       if (prop == "id") {
         tId = obj[prop];
       }
-
-      //   if (obj.hasOwnProperty(prop)) {
-      //     console.log(prop + " = " + obj[prop]);
-      //   }
     }
-    // console.log(tId);
-    // console.log(tName);
+
     let newTeam = new Team(tName, tId);
     console.log(newTeam);
+    $teamsMain.append(`<option value="${newTeam.id}">${newTeam.name}</option>`);
   }
 }

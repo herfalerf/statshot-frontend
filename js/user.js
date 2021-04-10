@@ -88,4 +88,5 @@ function updateUIOnUserLogin() {
   $logoutBtn.show();
   $userBtn.text(`Profile (${currentUser.username})`);
   $userBtn.show();
+  generateTeamsList();
 }
