@@ -2,8 +2,6 @@
 
 const BASE_URL = "http://localhost:5000";
 
-let tt;
-
 // Setup User class and related functions
 class User {
   constructor({ username, userId, favTeamId }) {
@@ -74,8 +72,11 @@ class User {
 }
 
 // Setup Team class and related functions
+
+let teamsObj;
+
 class Team {
-  constructor({
+  constructor(
     name,
     id,
     wins,
@@ -88,8 +89,8 @@ class Team {
     savePctg,
     powerPlayGoals,
     powerPlayGoalsAgainst,
-    powerPlayOpportunities,
-  }) {
+    powerPlayOpportunities
+  ) {
     this.name = name;
     this.id = id;
     this.wins = wins;
@@ -109,7 +110,7 @@ class Team {
     let response = await axios.get(`${BASE_URL}/api/teams`, {
       withCredentials: true,
     });
-    console.log(response.data.teams);
+    // console.log(response.data.teams);
 
     return response.data.teams;
   }
