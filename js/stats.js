@@ -29,12 +29,12 @@ async function generateTeamStats1(evt) {
 
   if (teamChart1 == undefined) {
     console.log(stat1);
-    $teamName.text(`${teamName}`);
+    $teamName1.text(`${teamName}`);
     generateChart1(stat1);
     console.log(teamChart1.data);
   } else {
     console.log(stat1);
-    $teamName.text(`${teamName}`);
+    $teamName1.text(`${teamName}`);
     updateChartTeam(teamChart1, stat1);
     console.log(teamChart1.data);
   }

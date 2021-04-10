@@ -8,7 +8,7 @@ const $logoutBtn = $("#logout-button");
 const $userBtn = $("#user-button");
 const $goodbye = $("#goodbye");
 const $teamsMain = $("#teams-main");
-const $teamName = $("#team-name");
+const $teamName1 = $("#team-name1");
 
 function hidePageComponents() {
   const components = [
