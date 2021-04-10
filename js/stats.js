@@ -15,15 +15,16 @@ async function generateTeamsList() {
     }
 
     let newTeam = new Team(tName, tId);
-    console.log(newTeam);
+    // console.log(newTeam);
     $teamsMain.append(`<option value="${newTeam.id}">${newTeam.name}</option>`);
   }
 }
 
-async function getTeamStats(evt) {
+async function generateTeamStats(evt) {
   //   evt.preventDefault();
   const id = $teamsMain.val();
-  console.log(id);
+  const stat = await Stat.getTeamStats(id);
+  console.log(stat);
 }
 
-$teamsMain.on("change", getTeamStats);
+$teamsMain.on("change", generateTeamStats);
