@@ -26,6 +26,7 @@ async function generateTeamsList() {
 }
 
 let stat1;
+let stat2;
 
 async function generateTeamStats1(evt) {
   //   evt.preventDefault();
@@ -46,3 +47,23 @@ async function generateTeamStats1(evt) {
 }
 
 $teamsMain1.on("change", generateTeamStats1);
+
+async function generateTeamStats2(evt) {
+  //   evt.preventDefault();
+  const id = $teamsMain2.val();
+  stat2 = await Stat.getTeamStats(id);
+
+  if (teamChart2 == undefined) {
+    console.log(stat2);
+    $teamName2.text(`${teamName}`);
+    generateChart1(stat2);
+    console.log(teamChart2.data);
+  } else {
+    console.log(stat2);
+    $teamName1.text(`${teamName}`);
+    updateChartTeam(teamChart2, stat2);
+    console.log(teamChart2.data);
+  }
+}
+
+$teamsMain2.on("change", generateTeamStats1);

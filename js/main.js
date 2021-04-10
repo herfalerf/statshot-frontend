@@ -10,6 +10,7 @@ const $goodbye = $("#goodbye");
 const $teamsMain1 = $("#teams-main1");
 const $teamsMain2 = $("#teams-main2");
 const $teamName1 = $("#team-name1");
+const $teamName2 = $("#team-name2");
 
 function hidePageComponents() {
   const components = [
