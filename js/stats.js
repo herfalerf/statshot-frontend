@@ -25,6 +25,7 @@ async function generateTeamStats(evt) {
   const id = $teamsMain.val();
   const stat = await Stat.getTeamStats(id);
   console.log(stat);
+  return stat;
 }
 
 $teamsMain.on("change", generateTeamStats);
