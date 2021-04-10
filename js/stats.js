@@ -20,24 +20,24 @@ async function generateTeamsList() {
   }
 }
 
-let stat;
+let stat1;
 
-async function generateTeamStats(evt) {
+async function generateTeamStats1(evt) {
   //   evt.preventDefault();
   const id = $teamsMain.val();
-  stat = await Stat.getTeamStats(id);
+  stat1 = await Stat.getTeamStats(id);
 
   if (teamChart1 == undefined) {
-    console.log(stat);
+    console.log(stat1);
     $teamName.text(`${teamName}`);
-    generateChart(stat);
+    generateChart1(stat1);
     console.log(teamChart1.data);
   } else {
-    console.log(stat);
+    console.log(stat1);
     $teamName.text(`${teamName}`);
-    updateChartTeam(teamChart1, stat);
+    updateChartTeam(teamChart1, stat1);
     console.log(teamChart1.data);
   }
 }
 
-$teamsMain.on("change", generateTeamStats);
+$teamsMain.on("change", generateTeamStats1);

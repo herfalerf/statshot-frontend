@@ -1,12 +1,12 @@
 let teamChart1;
 
-function generateChart(stat) {
+function generateChart1(stat) {
   let data = stat;
   let colors2 = ["#49A9EA", "#36CAAB", "#34495E", "#B370CF"];
 
-  let $myChart = $("#myChart")[0].getContext("2d");
+  let $teamChart1 = $("#teamChart1")[0].getContext("2d");
 
-  teamChart1 = new Chart($myChart, {
+  teamChart1 = new Chart($teamChart1, {
     type: "bar",
     data: {
       // labels: labels2,

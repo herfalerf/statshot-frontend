@@ -84,7 +84,7 @@ function saveUserCredentialsInLocalStorage() {
 //helper function to update the UI on user singup/login
 function updateUIOnUserLogin() {
   hidePageComponents();
-  $graphs.show();
+  $graphs1.show();
   $logoutBtn.show();
   $userBtn.text(`Profile (${currentUser.username})`);
   $userBtn.show();
