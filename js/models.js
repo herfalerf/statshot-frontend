@@ -123,6 +123,8 @@ class Team {
 }
 // let newStat;
 
+let teamName;
+
 class Stat {
   constructor({
     wins,
@@ -155,6 +157,8 @@ class Stat {
       withCredentials: true,
     });
     const stats = response.data.teams[0].teamStats[0].splits[0].stat;
+    console.log(response.data.teams[0].name);
+    teamName = response.data.teams[0].name;
     const newStat = new Stat(stats);
     return newStat;
   }
