@@ -42,7 +42,7 @@ def get_teams():
     """Call NHL API to get lucky number"""
     if "user_id" not in session:
         access = {"access": "Please log in to access this feature"}
-        return jsonify(access)
+        return jsonify(access), 403
     else:
         res_teams = requests.get(f"{API_BASE_URL}/teams")
         teams_data = res_teams.json()
@@ -55,7 +55,7 @@ def get_specified_team(team_id):
     """Call data for specific team by team id"""
     if "user_id" not in session:
         access = {"access": "Please log in to access this feature"}
-        return jsonify(access)
+        return jsonify(access), 403
 
     else:
         res_team = requests.get(f"{API_BASE_URL}/teams/{team_id}?expand=team.stats")
