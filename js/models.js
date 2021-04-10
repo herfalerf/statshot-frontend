@@ -137,7 +137,7 @@ class Stat {
     savePctg,
     powerPlayGoals,
     powerPlayGoalsAgainst,
-    powerPlayOpportunities,
+    // powerPlayOpportunities,
   }) {
     this.wins = wins;
     this.losses = losses;
@@ -149,7 +149,7 @@ class Stat {
     this.savePctg = savePctg;
     this.powerPlayGoals = powerPlayGoals;
     this.powerPlayGoalsAgainst = powerPlayGoalsAgainst;
-    this.powerPlayOpportunities = powerPlayOpportunities;
+    // this.powerPlayOpportunities = powerPlayOpportunities;
   }
 
   static async getTeamStats(teamId) {
