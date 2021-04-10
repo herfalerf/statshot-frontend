@@ -16,7 +16,12 @@ async function generateTeamsList() {
 
     let newTeam = new Team(tName, tId);
     // console.log(newTeam);
-    $teamsMain.append(`<option value="${newTeam.id}">${newTeam.name}</option>`);
+    $teamsMain1.append(
+      `<option value="${newTeam.id}">${newTeam.name}</option>`
+    );
+    $teamsMain2.append(
+      `<option value="${newTeam.id}">${newTeam.name}</option>`
+    );
   }
 }
 
@@ -24,7 +29,7 @@ let stat1;
 
 async function generateTeamStats1(evt) {
   //   evt.preventDefault();
-  const id = $teamsMain.val();
+  const id = $teamsMain1.val();
   stat1 = await Stat.getTeamStats(id);
 
   if (teamChart1 == undefined) {
@@ -40,4 +45,4 @@ async function generateTeamStats1(evt) {
   }
 }
 
-$teamsMain.on("change", generateTeamStats1);
+$teamsMain1.on("change", generateTeamStats1);
