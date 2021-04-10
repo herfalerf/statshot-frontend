@@ -19,3 +19,11 @@ async function generateTeamsList() {
     $teamsMain.append(`<option value="${newTeam.id}">${newTeam.name}</option>`);
   }
 }
+
+async function getTeamStats(evt) {
+  //   evt.preventDefault();
+  const id = $teamsMain.val();
+  console.log(id);
+}
+
+$teamsMain.on("change", getTeamStats);
