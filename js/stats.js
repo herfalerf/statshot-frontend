@@ -51,19 +51,21 @@ $teamsMain1.on("change", generateTeamStats1);
 async function generateTeamStats2(evt) {
   //   evt.preventDefault();
   const id = $teamsMain2.val();
+  console.log(id);
   stat2 = await Stat.getTeamStats(id);
+  console.log(stat2);
 
   if (teamChart2 == undefined) {
     console.log(stat2);
     $teamName2.text(`${teamName}`);
-    generateChart1(stat2);
+    generateChart2(stat2);
     console.log(teamChart2.data);
   } else {
     console.log(stat2);
-    $teamName1.text(`${teamName}`);
+    $teamName2.text(`${teamName}`);
     updateChartTeam(teamChart2, stat2);
     console.log(teamChart2.data);
   }
 }
 
-$teamsMain2.on("change", generateTeamStats1);
+$teamsMain2.on("change", generateTeamStats2);
