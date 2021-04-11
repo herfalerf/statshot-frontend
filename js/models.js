@@ -77,8 +77,8 @@ class User {
       withCredentials: true,
     });
 
-    console.log(response.data);
-    return response;
+    console.log(response.data.prefs.favTeam);
+    return response.data.prefs.favTeam;
   }
 }
 

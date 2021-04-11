@@ -162,7 +162,7 @@ def prefs(user_id):
 
     if "user_id" not in session or user_id != session['user_id']:
         access = {"access": "Please log in to access this page"}
-        return jsonify(access)
+        return jsonify(access), 403
     else:
         prefs = Preference.query.get_or_404(user_id)
         form = PrefsForm()

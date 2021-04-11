@@ -2,13 +2,16 @@
 
 //variable to hold the currently-logged-in user
 let currentUser;
+let favTeam;
 
 $(document).ready(async function () {
   hidePageComponents();
   currentUser = await checkForUser();
   if (currentUser.userId !== undefined) {
     console.log(`User ${currentUser.username} is logged in`);
+    favTeam = await User.getPrefs(currentUser.userId);
     updateUIOnUserLogin();
+    saveUserCredentialsInLocalStorage();
   } else {
     console.log("No user is logged in");
     $welcome.show();
@@ -78,6 +81,7 @@ function saveUserCredentialsInLocalStorage() {
   if (currentUser) {
     localStorage.setItem("username", currentUser.username);
     localStorage.setItem("userId", currentUser.userId);
+    localStorage.setItem("favTeam", favTeam);
   }
 }
 
@@ -90,3 +94,22 @@ function updateUIOnUserLogin() {
   $userBtn.show();
   generateTeamsList();
 }
+
+async function Profile(evt) {
+  evt.preventDefault();
+  if (localStorage.userId !== undefined) {
+    console.log(localStorage.userId);
+    hidePageComponents();
+    $userProfile.show();
+    $logoutBtn.show();
+    $userBtn.show();
+    favTeam = await User.getPrefs(localStorage.userId);
+    // console.log(favTeam.prefs.favTeam);
+  } else {
+    console.log("No user is logged in");
+    $welcome.show();
+    $loginBtn.show();
+    $signupBtn.show();
+  }
+}
+$userBtn.on("click", Profile);
