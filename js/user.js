@@ -37,6 +37,7 @@ async function signup(evt) {
 
   currentUser = await User.signup(username, password);
   console.log(currentUser);
+  favTeam = await User.getPrefs(currentUser.userId);
 
   $signupForm.trigger("reset");
 
@@ -56,6 +57,8 @@ async function login(evt) {
 
   currentUser = await User.login(username, password);
   console.log(currentUser);
+  favTeam = await User.getPrefs(currentUser.userId);
+  console.log(favTeam);
 
   $loginForm.trigger("reset");
 
@@ -103,7 +106,15 @@ async function Profile(evt) {
     $userProfile.show();
     $logoutBtn.show();
     $userBtn.show();
-    favTeam = await User.getPrefs(localStorage.userId);
+    console.log(localStorage.favTeam);
+    if (localStorage.favTeam == "None") {
+      $favTeam.text("You have not selected a favorite team");
+    } else {
+      $favTeam.text(
+        `Your currently selected favorite team is the ${localStorage.favTeam}`
+      );
+    }
+
     // console.log(favTeam.prefs.favTeam);
   } else {
     console.log("No user is logged in");
