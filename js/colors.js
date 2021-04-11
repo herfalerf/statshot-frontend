@@ -31,3 +31,17 @@ const teamColors = [
   { 53: "#8c2633" },
   { 54: "#b4975a" },
 ];
+
+function getTeamColor(id) {
+  let color;
+
+  for (let team in teamColors) {
+    let teamObj = teamColors[team];
+    for (let teamId in teamObj) {
+      if (teamId == id) {
+        color = teamObj[teamId];
+      }
+    }
+  }
+  return color;
+}
