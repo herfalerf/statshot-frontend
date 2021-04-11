@@ -45,7 +45,7 @@ function generateChart2(stat) {
       datasets: [
         {
           data: data,
-          backgroundColor: "#49A9EA",
+          backgroundColor: "#B370CF",
         },
       ],
     },
