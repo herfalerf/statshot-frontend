@@ -51,18 +51,29 @@ class User {
     return sessUser;
   }
 
-  static async testSession() {
-    let response = await axios.get(`${BASE_URL}/api/users/session`, {
-      withCredentials: true,
-    });
-    let testSess = response.data.user;
-    return testSess;
-  }
+  // static async testSession() {
+  //   let response = await axios.get(`${BASE_URL}/api/users/session`, {
+  //     withCredentials: true,
+  //   });
+  //   let testSess = response.data.user;
+  //   return testSess;
+  // }
 
   static async logout() {
     let response = await axios({
       method: "post",
       url: `${BASE_URL}/api/users/logout`,
+      withCredentials: true,
+    });
+
+    console.log(response.data);
+    return response;
+  }
+
+  static async getPrefs(userId) {
+    let response = await axios({
+      method: "get",
+      url: `${BASE_URL}/api/users/${userId}/prefs`,
       withCredentials: true,
     });
 
