@@ -3,6 +3,7 @@ const $signupForm = $("#signup-form");
 const $loginBtn = $("#login-button");
 const $signupBtn = $("#signup-button");
 const $graphs1 = $("#graphs1");
+const $graphs2 = $("#graphs2");
 const $welcome = $("#welcome");
 const $logoutBtn = $("#logout-button");
 const $userBtn = $("#user-button");
@@ -19,6 +20,7 @@ function hidePageComponents() {
     $loginBtn,
     $signupBtn,
     $graphs1,
+    $graphs2,
     $welcome,
     $logoutBtn,
     $userBtn,
