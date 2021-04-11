@@ -23,3 +23,12 @@ $signupBtn.on("click", navSignupClick);
 function updateNavOnLogin() {
   hidePageComponents();
 }
+
+function navUserProfile(evt) {
+  hidePageComponents();
+  $userProfile.show();
+  $logoutBtn.show();
+  $userBtn.show();
+}
+
+$userBtn.on("click", navUserProfile);

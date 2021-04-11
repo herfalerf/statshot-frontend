@@ -9,6 +9,7 @@ const $userBtn = $("#user-button");
 const $goodbye = $("#goodbye");
 const $teamsMain = $("#teams-main");
 const $teamsSecond = $("#teams-second");
+const $userProfile = $("#user-profile");
 // const $teamName = $("#team-name");
 // const $secTeamName = $("#second-team-name");
 
@@ -23,6 +24,7 @@ function hidePageComponents() {
     $logoutBtn,
     $userBtn,
     $goodbye,
+    $userProfile,
   ];
   components.forEach((c) => c.hide());
 }
