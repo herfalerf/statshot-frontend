@@ -38,9 +38,20 @@ async function generateTeamStats(evt) {
   } else {
     console.log(stat);
     $teamName.text(`${teamName}`);
-    updateChartTeam(teamChart1, stat);
+    updateChartTeam1(teamChart1, stat);
     console.log(teamChart1.data);
   }
 }
 
 $teamsMain.on("change", generateTeamStats);
+
+let stat2;
+
+async function generateSecondTeamStats(evt) {
+  const id = $teamsSecond.val();
+  stat2 = await Stat.getTeamStats(id);
+  $secTeamName.text(`${teamName}`);
+  updateChartTeam2(teamChart1, stat2);
+}
+
+$teamsSecond.on("change", generateSecondTeamStats);

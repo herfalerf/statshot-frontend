@@ -32,7 +32,12 @@ function generateChart(stat) {
   });
 }
 
-function updateChartTeam(chart, data) {
+function updateChartTeam1(chart, data) {
   chart.data.datasets[0].data = data;
+  chart.update();
+}
+
+function updateChartTeam2(chart, data) {
+  chart.data.datasets[1].data = data;
   chart.update();
 }
