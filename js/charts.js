@@ -1,6 +1,6 @@
 let teamChart1;
 
-function generateChart(stat) {
+function generateChart(stat, teamName) {
   let data = stat;
   let colors2 = ["#49A9EA", "#36CAAB", "#34495E", "#B370CF"];
 
@@ -12,10 +12,15 @@ function generateChart(stat) {
       // labels: labels2,
       datasets: [
         {
+          label: teamName,
           data: data,
           backgroundColor: "#49A9EA",
         },
-        { data: undefined, backgroundColor: "#B370CF" },
+        {
+          label: undefined,
+          data: undefined,
+          backgroundColor: "#B370CF",
+        },
       ],
     },
     options: {
@@ -24,20 +29,25 @@ function generateChart(stat) {
           text: "Stats",
           display: true,
         },
-        legend: {
-          display: false,
-        },
+        // legend: {
+        //   title: {
+        //     display: true,
+        //     text: "Beaver",
+        //   },
+        // },
       },
     },
   });
 }
 
-function updateChartTeam1(chart, data) {
+function updateChartTeam1(chart, data, teamName) {
   chart.data.datasets[0].data = data;
+  chart.data.datasets[0].label = teamName;
   chart.update();
 }
 
-function updateChartTeam2(chart, data) {
+function updateChartTeam2(chart, data, teamName) {
   chart.data.datasets[1].data = data;
+  chart.data.datasets[1].label = teamName;
   chart.update();
 }

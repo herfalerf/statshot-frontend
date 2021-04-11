@@ -32,13 +32,13 @@ async function generateTeamStats(evt) {
 
   if (teamChart1 == undefined) {
     console.log(stat);
-    $teamName.text(`${teamName}`);
-    generateChart(stat);
+    // $teamName.text(`${teamName}`);
+    generateChart(stat, teamName);
     console.log(teamChart1.data);
   } else {
     console.log(stat);
-    $teamName.text(`${teamName}`);
-    updateChartTeam1(teamChart1, stat);
+    // $teamName.text(`${teamName}`);
+    updateChartTeam1(teamChart1, stat, teamName);
     console.log(teamChart1.data);
   }
 }
@@ -50,8 +50,8 @@ let stat2;
 async function generateSecondTeamStats(evt) {
   const id = $teamsSecond.val();
   stat2 = await Stat.getTeamStats(id);
-  $secTeamName.text(`${teamName}`);
-  updateChartTeam2(teamChart1, stat2);
+  //   $secTeamName.text(`${teamName}`);
+  updateChartTeam2(teamChart1, stat2, teamName);
 }
 
 $teamsSecond.on("change", generateSecondTeamStats);
