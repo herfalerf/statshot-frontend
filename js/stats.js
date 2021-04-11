@@ -17,6 +17,9 @@ async function generateTeamsList() {
     let newTeam = new Team(tName, tId);
     // console.log(newTeam);
     $teamsMain.append(`<option value="${newTeam.id}">${newTeam.name}</option>`);
+    $teamsSecond.append(
+      `<option value="${newTeam.id}">${newTeam.name}</option>`
+    );
   }
 }
 
