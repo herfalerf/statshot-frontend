@@ -20,6 +20,7 @@ async function generateTeamsList() {
     $teamsSecond.append(
       `<option value="${newTeam.id}">${newTeam.name}</option>`
     );
+    $teamsUser.append(`<option value="${newTeam.id}">${newTeam.name}</option>`);
   }
 }
 

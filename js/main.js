@@ -9,6 +9,7 @@ const $userBtn = $("#user-button");
 const $goodbye = $("#goodbye");
 const $teamsMain = $("#teams-main");
 const $teamsSecond = $("#teams-second");
+const $teamsUser = $("#teams-user");
 const $userProfile = $("#user-profile");
 // const $teamName = $("#team-name");
 // const $secTeamName = $("#second-team-name");
