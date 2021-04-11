@@ -14,12 +14,12 @@ function generateChart(stat, teamName) {
         {
           label: teamName,
           data: data,
-          backgroundColor: "#49A9EA",
+          backgroundColor: teamColor,
         },
         {
           label: undefined,
           data: undefined,
-          backgroundColor: "#B370CF",
+          backgroundColor: undefined,
         },
       ],
     },
@@ -40,14 +40,16 @@ function generateChart(stat, teamName) {
   });
 }
 
-function updateChartTeam1(chart, data, teamName) {
+function updateChartTeam1(chart, data, teamName, teamColor) {
   chart.data.datasets[0].data = data;
   chart.data.datasets[0].label = teamName;
+  chart.data.datasets[0].backgroundColor = teamColor;
   chart.update();
 }
 
-function updateChartTeam2(chart, data, teamName) {
+function updateChartTeam2(chart, data, teamName, teamColor) {
   chart.data.datasets[1].data = data;
   chart.data.datasets[1].label = teamName;
+  chart.data.datasets[1].backgroundColor = teamColor;
   chart.update();
 }
