@@ -53,23 +53,25 @@
     </nav>
     <h1 id=welcome>Welcome to StatShot</h1>
     <p id=goodbye>You have been logged out.  Goodbye.</p>
-    <div id=graphs1>
-        <label for="teams">Choose a team:</label>
-        <select name="teams-main1" id="teams-main1">
-          <option>Team</option>
-          
-        </select>
-        <h2 id="team-name1"></h2>
-        <canvas id="teamChart1"></canvas>
-    </div>
-    <div id=graphs2>
-        <label for="teams2">Choose a team:</label>
-        <select name="teams-main2" id="teams-main2">
-          <option>Team</option>
-          
-        </select>
-        <h2 id="team-name2"></h2>
-        <canvas id="teamChart2"></canvas>
+    <div class="container">
+      <div class="row"></div>
+        <div id=graphs1 class="col-sm">
+          <label for="teams">Choose a team:</label>
+          <select name="teams-main1" id="teams-main1">
+            <option>Team</option>
+          </select>
+          <p id="team-name1"></p>
+          <canvas id="teamChart1"></canvas>
+        </div>
+        <div id=graphs2 class="col-sm">
+          <label for="teams2">Choose a team:</label>
+          <select name="teams-main2" id="teams-main2">
+            <option>Team</option>
+          </select>
+          <p id="team-name2"></p>
+          <canvas id="teamChart2"></canvas>
+        </div>
+      </div>
     </div>
     <div>
       <div>
@@ -93,11 +95,11 @@
               <label for="signup-password">Password</label>
             </b>
             <input
-              required
-              type="password"
-              id="signup-password"
-              placeholder="Password"
-              autocomplete="signup-password"
+                required
+                type="password"
+                id="signup-password"
+                placeholder="Password"
+                autocomplete="signup-password"
             />
           </div>
           <div>
