@@ -15,6 +15,7 @@ function generateChart(stat) {
           data: data,
           backgroundColor: "#49A9EA",
         },
+        { data: undefined, backgroundColor: "#B370CF" },
       ],
     },
     options: {
