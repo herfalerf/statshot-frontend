@@ -18,9 +18,8 @@ class User {
       },
       { withCredentials: true }
     );
-    console.log(`this is the signup ${response.data.user}`);
+
     let newUser = new User(response.data.user);
-    console.log(`this is a new user from signup`, newUser);
     return newUser;
   }
 
@@ -33,7 +32,7 @@ class User {
       },
       { withCredentials: true }
     );
-    console.log(`this is the login ${response.data.user}`);
+
     let returnUser = new User(response.data.user);
     return returnUser;
   }
@@ -46,7 +45,6 @@ class User {
     });
 
     let sessUser = new User(response.data.user);
-
     return sessUser;
   }
 
@@ -57,7 +55,6 @@ class User {
       withCredentials: true,
     });
 
-    console.log(response.data);
     return response;
   }
 
@@ -80,7 +77,6 @@ class User {
       { withCredentials: true }
     );
 
-    console.log(response.data.prefs.favTeam);
     return response.data.prefs.favTeam;
   }
 }
@@ -134,7 +130,6 @@ class Stat {
       withCredentials: true,
     });
     const stats = response.data.teams[0].teamStats[0].splits[0].stat;
-    console.log(response.data.teams[0].name);
     teamName = response.data.teams[0].name;
     const newStat = new Stat(stats);
     return newStat;
