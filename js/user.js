@@ -1,8 +1,9 @@
 "use strict";
 
-//variable to hold the currently-logged-in user
+//variable to hold the currently-logged-in user, favorite team, and favorite team id
 let currentUser;
 let favTeam;
+let favName;
 
 $(document).ready(async function () {
   hidePageComponents();
@@ -37,7 +38,7 @@ async function signup(evt) {
 
   currentUser = await User.signup(username, password);
   console.log(currentUser);
-  favTeam = await User.getPrefs(currentUser.userId);
+  favTeamId = await User.getPrefs(currentUser.userId);
 
   $signupForm.trigger("reset");
 
@@ -81,11 +82,18 @@ async function logout(evt) {
 
 $logoutBtn.on("click", logout);
 //helper function to save the current user information in local storage
-function saveUserCredentialsInLocalStorage() {
+async function saveUserCredentialsInLocalStorage() {
   if (currentUser) {
+    let teamsList = await Team.getTeams();
+    console.log(teamsList);
+
+    favName = teamsList.find(function (obj) {
+      if (obj["id"] == favTeam) return obj;
+    });
     localStorage.setItem("username", currentUser.username);
     localStorage.setItem("userId", currentUser.userId);
-    localStorage.setItem("favTeam", favTeam);
+    localStorage.setItem("favTeamId", favTeam);
+    localStorage.setItem("favTeamName", favName.name);
   }
 }
 
@@ -108,11 +116,12 @@ async function Profile(evt) {
     $logoutBtn.show();
     $userBtn.show();
     console.log(localStorage.favTeam);
-    if (localStorage.favTeam == "None") {
+
+    if (localStorage.favTeamId == "None") {
       $favTeam.text("You have not selected a favorite team");
     } else {
       $favTeam.text(
-        `Your currently selected favorite team is the ${localStorage.favTeam}`
+        `Your currently selected favorite team is the ${localStorage.favTeamName}`
       );
     }
 
@@ -125,3 +134,34 @@ async function Profile(evt) {
   }
 }
 $userBtn.on("click", Profile);
+
+async function setFavoriteTeam(evt) {
+  evt.preventDefault();
+  let newFav;
+  console.log("I am submitted");
+  console.log(localStorage.userId);
+
+  if (localStorage.userId == undefined) {
+    hidePageComponents();
+    $userProfile.show();
+    $logoutBtn.show();
+    $userBtn.show();
+  } else {
+    const teamId = $teamsUser.val();
+    console.log(teamId);
+    let teamsList = await Team.getTeams();
+    console.log(teamsList);
+    newFav = await User.setPrefs(localStorage.userId, teamId);
+    favName = teamsList.find(function (obj) {
+      if (obj["id"] == newFav) return obj;
+    });
+
+    localStorage.setItem("favTeam", newFav);
+    localStorage.setItem("favTeamName", favName.name);
+    $favTeam.text(
+      `Your currently selected favorite team is the ${localStorage.favTeamName}`
+    );
+  }
+}
+
+$teamsUserForm.on("submit", setFavoriteTeam);

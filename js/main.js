@@ -12,6 +12,8 @@ const $teamsSecond = $("#teams-second");
 const $teamsUser = $("#teams-user");
 const $userProfile = $("#user-profile");
 const $favTeam = $("#fav-team");
+const $teamsUserForm = $("#fav-team-form");
+const $favTeamBtn = $("fav-team-button");
 // const $teamName = $("#team-name");
 // const $secTeamName = $("#second-team-name");
 

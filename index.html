@@ -56,11 +56,16 @@
     <div id="user-profile">
       <div>
         <div>
-          <label for="teams">Would you like to select a favorite team?</label>
+          <form method="POST" id="fav-team-form">
+            <label for="teams">Would you like to select a favorite team?</label>
           <select name="teams-user" id="teams-user">
             <option>Team</option>
-          
           </select>
+          <button id="fav-team-button">
+            <b>Set Favorite</b>
+          </button>
+          </form>
+          
           <h3 id="fav-team"></h3>
         </div>
       </div>
