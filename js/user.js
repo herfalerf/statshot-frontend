@@ -72,6 +72,7 @@ async function logout(evt) {
   evt.preventDefault();
 
   await User.logout();
+  localStorage.clear();
   hidePageComponents();
   $goodbye.show();
   $loginBtn.show();

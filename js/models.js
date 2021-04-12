@@ -79,6 +79,19 @@ class User {
 
     return response.data.prefs.favTeam;
   }
+
+  static async setPrefs(userId, favTeamId) {
+    let response = await axios.post(
+      `${BASE_URL}/api/users/${userId}/prefs`,
+      {
+        favTeamId,
+      },
+      { withCredentials: true }
+    );
+
+    console.log(response.data);
+    return response.dat;
+  }
 }
 
 // Setup Team class and related functions
