@@ -14,8 +14,6 @@ const $userProfile = $("#user-profile");
 const $favTeam = $("#fav-team");
 const $teamsUserForm = $("#fav-team-form");
 const $favTeamBtn = $("fav-team-button");
-// const $teamName = $("#team-name");
-// const $secTeamName = $("#second-team-name");
 
 function hidePageComponents() {
   const components = [

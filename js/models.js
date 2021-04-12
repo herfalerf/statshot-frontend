@@ -35,7 +35,6 @@ class User {
     );
     console.log(`this is the login ${response.data.user}`);
     let returnUser = new User(response.data.user);
-    // console.log(`this is a new user from login`, returnUser);
     return returnUser;
   }
 
@@ -50,14 +49,6 @@ class User {
 
     return sessUser;
   }
-
-  // static async testSession() {
-  //   let response = await axios.get(`${BASE_URL}/api/users/session`, {
-  //     withCredentials: true,
-  //   });
-  //   let testSess = response.data.user;
-  //   return testSess;
-  // }
 
   static async logout() {
     let response = await axios({
@@ -94,57 +85,22 @@ class User {
   }
 }
 
-// Setup Team class and related functions
-
 let teamsObj;
 
 class Team {
-  constructor(
-    name,
-    id
-    // wins,
-    // losses,
-    // ot,
-    // pts,
-    // gamesPlayed,
-    // goalsPerGame,
-    // goalsAgainstPerGame,
-    // savePctg,
-    // powerPlayGoals,
-    // powerPlayGoalsAgainst,
-    // powerPlayOpportunities
-  ) {
+  constructor(name, id) {
     this.name = name;
     this.id = id;
-    // this.wins = wins;
-    // this.losses = losses;
-    // this.ot = ot;
-    // this.pts = pts;
-    // this.gamesPlayed = gamesPlayed;
-    // this.goalsPerGame = goalsPerGame;
-    // this.goalsAgainstPerGame = goalsAgainstPerGame;
-    // this.savePctg = savePctg;
-    // this.powerPlayGoals = powerPlayGoals;
-    // this.powerPlayGoalsAgainst = powerPlayGoalsAgainst;
-    // this.powerPlayOpportunities = powerPlayOpportunities;
   }
 
   static async getTeams() {
     let response = await axios.get(`${BASE_URL}/api/teams`, {
       withCredentials: true,
     });
-    // console.log(response.data.teams);
 
     return response.data.teams;
   }
-  // static async getTeamStats(teamId) {
-  //   let response = await axios.get(`${BASE_URL}/api/teams/${teamId}`, {
-  //     withCredentials: true,
-  //   });
-  //   console.log(response.data.teams[0].teamStats[0].splits[0].stat);
-  // }
 }
-// let newStat;
 
 let teamName;
 
@@ -160,7 +116,6 @@ class Stat {
     savePctg,
     powerPlayGoals,
     powerPlayGoalsAgainst,
-    // powerPlayOpportunities,
   }) {
     this.wins = wins;
     this.losses = losses;
@@ -172,7 +127,6 @@ class Stat {
     this.savePctg = savePctg;
     this.powerPlayGoals = powerPlayGoals;
     this.powerPlayGoalsAgainst = powerPlayGoalsAgainst;
-    // this.powerPlayOpportunities = powerPlayOpportunities;
   }
 
   static async getTeamStats(teamId) {

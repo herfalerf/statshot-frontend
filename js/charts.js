@@ -2,14 +2,12 @@ let teamChart1;
 
 function generateChart(stat, teamName) {
   let data = stat;
-  let colors2 = ["#49A9EA", "#36CAAB", "#34495E", "#B370CF"];
 
   let $myChart = $("#myChart")[0].getContext("2d");
 
   teamChart1 = new Chart($myChart, {
     type: "bar",
     data: {
-      // labels: labels2,
       datasets: [
         {
           label: teamName,
@@ -29,12 +27,6 @@ function generateChart(stat, teamName) {
           text: "Stats",
           display: true,
         },
-        // legend: {
-        //   title: {
-        //     display: true,
-        //     text: "Beaver",
-        //   },
-        // },
       },
     },
   });
