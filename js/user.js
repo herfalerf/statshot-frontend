@@ -38,7 +38,7 @@ async function signup(evt) {
 
   currentUser = await User.signup(username, password);
   console.log(currentUser);
-  favTeamId = await User.getPrefs(currentUser.userId);
+  favTeam = await User.getPrefs(currentUser.userId);
 
   $signupForm.trigger("reset");
 
@@ -90,6 +90,8 @@ async function saveUserCredentialsInLocalStorage() {
     favName = teamsList.find(function (obj) {
       if (obj["id"] == favTeam) return obj;
     });
+    console.log(favName);
+    console.log(`this is favName from saveUserCredentials ${favName}`);
     localStorage.setItem("username", currentUser.username);
     localStorage.setItem("userId", currentUser.userId);
     localStorage.setItem("favTeamId", favTeam);
@@ -152,11 +154,12 @@ async function setFavoriteTeam(evt) {
     let teamsList = await Team.getTeams();
     console.log(teamsList);
     newFav = await User.setPrefs(localStorage.userId, teamId);
+    console.log(newFav);
     favName = teamsList.find(function (obj) {
       if (obj["id"] == newFav) return obj;
     });
 
-    localStorage.setItem("favTeam", newFav);
+    localStorage.setItem("favTeam", newFav.id);
     localStorage.setItem("favTeamName", favName.name);
     $favTeam.text(
       `Your currently selected favorite team is the ${localStorage.favTeamName}`
