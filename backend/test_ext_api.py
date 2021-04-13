@@ -51,7 +51,7 @@ class ExtAPITestCase(TestCase):
 
             json_data = resp.get_json()
 
-            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.status_code, 403)
             self.assertIn('Please log in to access this feature', str(json_data))
     
     def test_valid_specific_team_response(self):
@@ -76,5 +76,5 @@ class ExtAPITestCase(TestCase):
 
             json_data = resp.get_json()
 
-            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.status_code, 403)
             self.assertIn('Please log in to access this feature', str(json_data))

@@ -40,7 +40,7 @@ class PrefsAPITestCase(TestCase):
                                                 "password": "validpass"})
 
             user = User.query.filter_by(username='validreg').first()
-            resp = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            resp = c.post(f'/api/users/{user.id}/prefs', json={"favTeamId": 25})
 
             json_data = resp.get_json()
 
@@ -55,11 +55,11 @@ class PrefsAPITestCase(TestCase):
                                                 "username": "validreg", 
                                                 "password": "validpass"})
 
-            resp = c.post('/api/prefs/9999', json={"favTeamId": 25})
+            resp = c.post('/api/users/9999/prefs', json={"favTeamId": 25})
 
             json_data = resp.get_json()
 
-            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.status_code, 403)
             self.assertIn("'access': 'Please log in to access this page'", str(json_data))
             self.assertNotIn("'favTeam': '25'", str(json_data))
 
@@ -75,11 +75,11 @@ class PrefsAPITestCase(TestCase):
            
             logout = c.post('/api/users/logout')
             
-            resp = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            resp = c.post(f'/api/users/{user.id}/prefs', json={"favTeamId": 25})
             
             json_data = resp.get_json()
 
-            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.status_code, 403)
             self.assertIn("'access': 'Please log in to access this page'", str(json_data))
             self.assertNotIn("'favTeam': '25'", str(json_data))
 
@@ -93,9 +93,9 @@ class PrefsAPITestCase(TestCase):
 
             user = User.query.filter_by(username='validreg').first()
 
-            set_prefs = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            set_prefs = c.post(f'/api/users/{user.id}/prefs', json={"favTeamId": 25})
 
-            resp = c.get(f'/api/prefs/{user.id}')
+            resp = c.get(f'/api/users/{user.id}/prefs')
 
             json_data = resp.get_json()
 
@@ -111,13 +111,13 @@ class PrefsAPITestCase(TestCase):
 
             user = User.query.filter_by(username='validreg').first()
 
-            set_prefs = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            set_prefs = c.post(f'/api/users/{user.id}/prefs', json={"favTeamId": 25})
 
-            resp = c.get(f'/api/prefs/9999')
+            resp = c.get(f'/api/users/9999/prefs')
 
             json_data = resp.get_json()
 
-            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.status_code, 403)
             self.assertIn("'access': 'Please log in to access this page'", str(json_data))
             self.assertNotIn("'favTeam': '25'", str(json_data))
 
@@ -130,15 +130,15 @@ class PrefsAPITestCase(TestCase):
             
             user = User.query.filter_by(username='validreg').first()
 
-            set_prefs = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            set_prefs = c.post(f'/api/users/{user.id}/prefs', json={"favTeamId": 25})
            
             logout = c.post('/api/users/logout')
             
-            resp = c.get(f'/api/prefs/{user.id}')
+            resp = c.get(f'/api/users/{user.id}/prefs')
             
             json_data = resp.get_json()
 
-            self.assertEqual(resp.status_code, 200)
+            self.assertEqual(resp.status_code, 403)
             self.assertIn("'access': 'Please log in to access this page'", str(json_data))
             self.assertNotIn("'favTeam': '25'", str(json_data))
 
@@ -151,7 +151,7 @@ class PrefsAPITestCase(TestCase):
 
             user = User.query.filter_by(username='validreg').first()
             
-            resp = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            resp = c.post(f'/api/users/{user.id}/prefs', json={"favTeamId": 25})
             
             prefs = Preference.query.get(user.id)
 
@@ -166,11 +166,11 @@ class PrefsAPITestCase(TestCase):
 
             user = User.query.filter_by(username='validreg').first()
             
-            set_prefs = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            set_prefs = c.post(f'/api/users/{user.id}/prefs', json={"favTeamId": 25})
 
             session.pop("fav_team", None)
 
-            resp = c.get(f'/api/prefs{user.id}')
+            resp = c.get(f'/api/users/{user.id}/prefs')
 
             prefs = Preference.query.get(user.id)
 
@@ -185,7 +185,7 @@ class PrefsAPITestCase(TestCase):
 
             user = User.query.filter_by(username='validreg').first()
             
-            set_prefs = c.post(f'/api/prefs/{user.id}', json={"favTeamId": 25})
+            set_prefs = c.post(f'/api/users/{user.id}/prefs', json={"favTeamId": 25})
 
             prefs = Preference.query.get(user.id)
 
