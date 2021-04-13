@@ -2,6 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
 
+
 bcrypt = Bcrypt()
 db = SQLAlchemy()
 
@@ -64,3 +65,16 @@ class Preference(db.Model):
     )
 
     fav_team_id = db.Column(db.Integer)
+
+class Login(db.Model):
+    """Login timestamps"""
+
+    __tablename__ = 'logins'
+
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.id'),
+                        nullable=False)
+    time_stamp = db.Column(db.String,
+                           nullable=False)
+    
+    
