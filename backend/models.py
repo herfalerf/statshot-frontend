@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+import datetime
 
 
 
@@ -78,5 +79,19 @@ class Login(db.Model):
                         nullable=False)
     time_stamp = db.Column(db.String,
                            nullable=False)
+
+    @classmethod
+    def record_login(cls, user_id):
+        """Record login in database"""
     
+        login = cls(
+            user_id = user_id,
+            time_stamp = datetime.datetime.now()
+        )
+        db.session.add(login)
+        return login
+
+
+    
+
     
