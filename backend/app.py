@@ -3,7 +3,7 @@ import requests
 from flask_debugtoolbar import DebugToolbarExtension
 from secrets import API_SECRET_KEY
 from forms import RegisterForm, LoginForm, PrefsForm
-from models import connect_db, db, User, Preference
+from models import connect_db, db, User, Preference, Login
 from flask_cors import CORS, cross_origin
 from sqlalchemy import exc
 
@@ -82,8 +82,10 @@ def register():
             db.session.commit()
 
             prefs = Preference(user_id=user.id)
+            log = Login.record_login(user.id)
             db.session.add(prefs)
             db.session.commit()
+            
         
             session['username'] = user.username
             session['user_id'] = user.id
@@ -120,6 +122,8 @@ def login():
         if user: 
             session['username'] = user.username
             session['user_id'] = user.id
+            log = Login.record_login(user.id)
+            db.session.commit()
             success['user']['login'] = True
             success['user']['username'] = session['username']
             success['user']['userId'] = session['user_id']
