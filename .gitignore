@@ -1,4 +1,0 @@
-venv
-/backend/secrets.py
-__pycache__
-*.pyc
