@@ -19,6 +19,21 @@ $(document).ready(async function () {
   }
 });
 
+async function home(evt) {
+  evt.preventDefault();
+  hidePageComponents();
+  currentUser = await checkForUser();
+  if (currentUser.userId !== undefined) {
+    updateUIOnUserLogin();
+  } else {
+    $welcome.show();
+    $loginBtn.show();
+    $signupBtn.show();
+  }
+}
+
+$homeBtn.on("click", home);
+
 async function checkForUser() {
   let sessionUser = await User.checkSession();
   return sessionUser;

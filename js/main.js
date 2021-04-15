@@ -13,7 +13,8 @@ const $teamsUser = $("#teams-user");
 const $userProfile = $("#user-profile");
 const $favTeam = $("#fav-team");
 const $teamsUserForm = $("#fav-team-form");
-const $favTeamBtn = $("fav-team-button");
+const $favTeamBtn = $("#fav-team-button");
+const $homeBtn = $("#home-button");
 
 function hidePageComponents() {
   const components = [
