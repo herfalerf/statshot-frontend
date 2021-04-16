@@ -111,27 +111,26 @@
       <div class="container m-5 p-5">
         <div class="row">
           <div class="col-5 m-3 p-3">
-            <div class="container bg-dark bg-gradient p-5">
+            <div
+              id="login-container"
+              class="container bg-dark bg-gradient p-5 rounded"
+            >
               <div class="row justify-content-center">
-                <div
-                  class="col-6 text-light my-2 fs-4 fw-bold"
-                  id="signup-button"
-                >
+                <div class="col-6 text-light fs-4 fw-bold" id="signup-button">
                   Sign Up
                 </div>
-                <div
-                  class="col-6 text-light my-2 fs-4 fw-bold"
-                  id="login-button"
-                >
+                <div class="col-6 text-light fs-4 fw-bold" id="login-button">
                   Log In
                 </div>
               </div>
-              <div class="row">
+              <div id="signup-row" class="row">
                 <div class="col-12 px-2">
                   <form method="POST" id="signup-form">
                     <div>
                       <b>
-                        <label for="signup-username" class="text-light my-4"
+                        <label
+                          for="signup-username"
+                          class="form-label text-light my-4"
                           >Username</label
                         >
                       </b>
@@ -140,6 +139,7 @@
                         type="text"
                         id="signup-username"
                         placeholder="Username"
+                        class="form-control"
                       />
                     </div>
                     <div>
@@ -154,10 +154,11 @@
                         id="signup-password"
                         placeholder="Password"
                         autocomplete="signup-password"
+                        class="form-control"
                       />
                     </div>
                     <div>
-                      <button class="btn btn-outline-light">
+                      <button class="btn btn-outline-light my-2">
                         <b>Sign Up!</b>
                       </button>
                     </div>
@@ -178,6 +179,7 @@
                         type="text"
                         id="login-username"
                         placeholder="Username"
+                        class="form-control"
                       />
                     </div>
                     <div>
@@ -192,10 +194,11 @@
                         id="login-password"
                         placeholder="Password"
                         autocomplete="login-password"
+                        class="form-control"
                       />
                     </div>
                     <div>
-                      <button class="btn btn-outline-light">
+                      <button class="btn btn-outline-light my-2">
                         <b>Welcome Back!</b>
                       </button>
                     </div>
