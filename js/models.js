@@ -1,6 +1,6 @@
 "use strict";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://statshot-backend.herokuapp.com/";
 
 // Setup User class and related functions
 class User {

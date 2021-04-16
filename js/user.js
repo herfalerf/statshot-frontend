@@ -41,17 +41,21 @@ async function checkForUser() {
 
 async function signup(evt) {
   evt.preventDefault();
+  try {
+    const username = $("#signup-username").val();
+    const password = $("#signup-password").val();
 
-  const username = $("#signup-username").val();
-  const password = $("#signup-password").val();
+    currentUser = await User.signup(username, password);
+    favTeam = await User.getPrefs(currentUser.userId);
 
-  currentUser = await User.signup(username, password);
-  favTeam = await User.getPrefs(currentUser.userId);
+    $signupForm.trigger("reset");
 
-  $signupForm.trigger("reset");
-
-  saveUserCredentialsInLocalStorage();
-  updateUIOnUserLogin();
+    saveUserCredentialsInLocalStorage();
+    updateUIOnUserLogin();
+  } catch (err) {
+    $message.show();
+    $message.text("That username is already taken");
+  }
 }
 
 $signupForm.on("submit", signup);
@@ -59,16 +63,22 @@ $signupForm.on("submit", signup);
 async function login(evt) {
   evt.preventDefault();
 
-  const username = $("#login-username").val();
-  const password = $("#login-password").val();
+  try {
+    const username = $("#login-username").val();
+    const password = $("#login-password").val();
 
-  currentUser = await User.login(username, password);
-  favTeam = await User.getPrefs(currentUser.userId);
+    currentUser = await User.login(username, password);
+    favTeam = await User.getPrefs(currentUser.userId);
 
-  $loginForm.trigger("reset");
+    $loginForm.trigger("reset");
 
-  saveUserCredentialsInLocalStorage();
-  updateUIOnUserLogin();
+    saveUserCredentialsInLocalStorage();
+    updateUIOnUserLogin();
+  } catch (err) {
+    console.log("this is an error");
+    $message.show();
+    $message.text("Invalid username/password");
+  }
 }
 
 $loginForm.on("submit", login);
@@ -79,7 +89,8 @@ async function logout(evt) {
   await User.logout();
   localStorage.clear();
   hidePageComponents();
-  $goodbye.show();
+  $message.show();
+  $message.text("You have been logged out, Goodbye");
   $loginBtn.show();
   $signupBtn.show();
 }

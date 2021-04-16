@@ -6,7 +6,7 @@ const $graphs = $("#graphs");
 const $welcome = $("#welcome");
 const $logoutBtn = $("#logout-button");
 const $userBtn = $("#user-button");
-const $goodbye = $("#goodbye");
+const $message = $("#message");
 const $teamsMain = $("#teams-main");
 const $teamsSecond = $("#teams-second");
 const $teamsUser = $("#teams-user");
@@ -26,7 +26,7 @@ function hidePageComponents() {
     $welcome,
     $logoutBtn,
     $userBtn,
-    $goodbye,
+    $message,
     $userProfile,
   ];
   components.forEach((c) => c.hide());
