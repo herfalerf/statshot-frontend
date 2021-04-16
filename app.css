@@ -1,27 +1,17 @@
-/* #signup-button {
-    background-color: red;
+body {
+    background-image: url("https://images.unsplash.com/photo-1515703407324-5f753afd8be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1267&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-#login-button {
-    background-color: blue;
+#signup-button:hover {
+    cursor: pointer;
 }
 
-#signup-form {
-    background-color: red;
+#login-button:hover {
+    cursor: pointer;
 }
 
-#login-form {
-    background-color: blue;
-} */
-
-/* #login-container {
-    background-color: rgba(89, 91, 92, 0.3);
-    
+#welcome-container {
+    background-color: rgba(255, 255, 255, 0.705)
 }
-
-#signup-row {
-    background-color: rgba(10, 10, 10, 0.3)
-}
-#signup-button {
-    background-color: rgba(10, 10, 10, 0.3)
-} */

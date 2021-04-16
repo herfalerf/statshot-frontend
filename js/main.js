@@ -15,6 +15,7 @@ const $favTeam = $("#fav-team");
 const $teamsUserForm = $("#fav-team-form");
 const $favTeamBtn = $("#fav-team-button");
 const $homeBtn = $("#home-button");
+const $loginContainer = $("#login-container");
 
 function hidePageComponents() {
   const components = [
@@ -28,6 +29,7 @@ function hidePageComponents() {
     $userBtn,
     $message,
     $userProfile,
+    $loginContainer,
   ];
   components.forEach((c) => c.hide());
 }

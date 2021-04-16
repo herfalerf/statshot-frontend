@@ -13,6 +13,7 @@ $(document).ready(async function () {
     updateUIOnUserLogin();
     saveUserCredentialsInLocalStorage();
   } else {
+    $loginContainer.show();
     $welcome.show();
     $loginBtn.show();
     $signupBtn.show();
@@ -89,6 +90,7 @@ async function logout(evt) {
   await User.logout();
   localStorage.clear();
   hidePageComponents();
+  $loginContainer.show();
   $message.show();
   $message.text("You have been logged out, Goodbye");
   $loginBtn.show();

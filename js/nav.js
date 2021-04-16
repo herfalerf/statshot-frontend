@@ -2,6 +2,7 @@
 
 function navLoginClick(evt) {
   hidePageComponents();
+  $loginContainer.show();
   $welcome.show();
   $loginForm.show();
   $signupBtn.show();
@@ -14,6 +15,7 @@ $loginBtn.on("click", navLoginClick);
 
 function navSignupClick(evt) {
   hidePageComponents();
+  $loginContainer.show();
   $welcome.show();
   $signupForm.show();
   $signupBtn.show();
