@@ -98,6 +98,7 @@ async function logout(evt) {
   $loginBtn.show();
   $signupBtn.show();
   $loginForm.show();
+  $welcome.show();
 }
 
 $logoutBtn.on("click", logout);
