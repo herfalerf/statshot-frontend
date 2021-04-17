@@ -10,6 +10,12 @@ $(document).ready(async function () {
   currentUser = await checkForUser();
   if (currentUser.userId !== undefined) {
     favTeam = await User.getPrefs(currentUser.userId);
+    if (favTeam) {
+      let favColor = getTeamColor(favTeam);
+      $userProfile.css("border-color", `${favColor}`);
+      $graphs.css("border-color", `${favColor}`);
+    }
+
     updateUIOnUserLogin();
     saveUserCredentialsInLocalStorage();
   } else {
@@ -171,11 +177,14 @@ async function setFavoriteTeam(evt) {
       if (obj["id"] == newFav) return obj;
     });
 
-    localStorage.setItem("favTeam", newFav.id);
+    localStorage.setItem("favTeamId", newFav);
     localStorage.setItem("favTeamName", favName.name);
     $favTeam.text(
       `Your currently selected favorite team is the ${localStorage.favTeamName}`
     );
+    let favColor = getTeamColor(localStorage.favTeamId);
+    $userProfile.css("border-color", `${favColor}`);
+    $graphs.css("border-color", `${favColor}`);
   }
 }
 

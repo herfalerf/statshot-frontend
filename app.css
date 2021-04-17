@@ -16,13 +16,17 @@ body {
 }
 
 #welcome-container {
-    background-color: rgba(255, 255, 255, 0.705)
+    background-color: rgba(255, 255, 255, 0.705);
+    border-style: solid;
 }
 
 #graphs {
-    background-color: rgba(255, 255, 255, 0.705)
+    background-color: rgba(255, 255, 255, 0.705);
+    border-style: solid;
+    border-width: thick;
 }
 
 #user-profile {
-    background-color: rgba(255, 255, 255, 0.705)
+    background-color: rgba(255, 255, 255, 0.705);
+    border-style: solid;
 }
