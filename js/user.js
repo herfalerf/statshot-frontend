@@ -122,7 +122,11 @@ async function saveUserCredentialsInLocalStorage() {
     localStorage.setItem("username", currentUser.username);
     localStorage.setItem("userId", currentUser.userId);
     localStorage.setItem("favTeamId", favTeam);
-    localStorage.setItem("favTeamName", favName.name);
+    try {
+      localStorage.setItem("favTeamName", favName.name);
+    } catch (err) {
+      console.log("no favorite team selected");
+    }
   }
 }
 
