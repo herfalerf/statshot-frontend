@@ -14,6 +14,7 @@ $(document).ready(async function () {
       let favColor = getTeamColor(favTeam);
       $userProfile.css("border-color", `${favColor}`);
       $graphs.css("border-color", `${favColor}`);
+      $profileInfo.css("border-color", `${favColor}`);
     }
 
     updateUIOnUserLogin();
@@ -139,6 +140,7 @@ async function Profile(evt) {
   evt.preventDefault();
   if (localStorage.userId !== undefined) {
     hidePageComponents();
+    $profileInfo.show();
     $userProfile.show();
     $logoutBtn.show();
     $userBtn.show();
@@ -185,6 +187,7 @@ async function setFavoriteTeam(evt) {
     let favColor = getTeamColor(localStorage.favTeamId);
     $userProfile.css("border-color", `${favColor}`);
     $graphs.css("border-color", `${favColor}`);
+    $profileInfo.css("border-color", `${favColor}`);
   }
 }
 
