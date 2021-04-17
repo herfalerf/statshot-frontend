@@ -57,17 +57,17 @@
 
     <p id="message" class="bg-warning"></p>
     <div class="container">
-      <div id="user-profile">
+      <div id="user-profile" class="m-3 p-3 rounded">
         <div>
           <div>
             <form method="POST" id="fav-team-form">
               <label for="teams"
                 >Would you like to select a favorite team?</label
               >
-              <select name="teams-user" id="teams-user">
+              <select class="form-select" name="teams-user" id="teams-user">
                 <option>Team</option>
               </select>
-              <button id="fav-team-button">
+              <button class="btn btn-outline-dark my-2" id="fav-team-button">
                 <b>Set Favorite</b>
               </button>
             </form>
@@ -76,16 +76,16 @@
           </div>
         </div>
       </div>
-      <div id="graphs">
+      <div id="graphs" class="m-3 rounded">
         <div class="container">
           <div class="row">
             <div class="col m-2">
               <label for="teams">Choose a team:</label>
-              <select name="teams-main" id="teams-main">
+              <select class="form-select" name="teams-main" id="teams-main">
                 <option>Team</option>
               </select>
               <label for="teams2">Choose a team:</label>
-              <select name="teams-second" id="teams-second">
+              <select class="form-select" name="teams-second" id="teams-second">
                 <option>Team</option>
               </select>
               <h2 id="team-name"></h2>
