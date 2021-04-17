@@ -17,6 +17,8 @@ $(document).ready(async function () {
     $welcome.show();
     $loginBtn.show();
     $signupBtn.show();
+    $loginForm.show();
+    $loginBtn.addClass("border-bottom border-start border-3 rounded");
   }
 });
 
@@ -95,6 +97,7 @@ async function logout(evt) {
   $message.text("You have been logged out, Goodbye");
   $loginBtn.show();
   $signupBtn.show();
+  $loginForm.show();
 }
 
 $logoutBtn.on("click", logout);
