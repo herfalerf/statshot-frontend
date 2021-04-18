@@ -21,33 +21,33 @@ StatShot is a single page application with simple functionality.  Users can crea
 
 ###### Login/Signup
 
-![login-reg](C:\Users\John\OneDrive\Desktop\statshot images\login-reg.png)
+![login-reg](https://github.com/herfalerf/statshot-frontend/blob/master/statshot%20images/login-reg.png?raw=true)
 
 This is SignUp/LogIn page.  The page defaults to the login form, but if a user does not have an account they can simply select SignUp, to create one.  It also contains a brief description of what StatShot does, and links to the front-end Github repo and my LinkedIn profile.   
 
 ###### Graphs page  
 
-![graphs-main](C:\Users\John\OneDrive\Desktop\statshot images\graphs-main.png)
+![graphs-main](https://github.com/herfalerf/statshot-frontend/blob/master/statshot%20images/graphs-main.png?raw=true)
 
 Upon logging in or registering a new account, users will be brought to the main graphs page where they will presented with two dropdown menus which can each be used to select a team.
 
-![graphs-demo](C:\Users\John\OneDrive\Desktop\statshot images\graphs-demo.png)
+![graphs-demo](https://github.com/herfalerf/statshot-frontend/blob/master/statshot%20images/graphs-demo.png?raw=true)
 
 As teams are selected, the graph will be populated with data.  Users can change the selected teams easily using the drop downs and the graph animates through the change in data.  The colors of the bars utilize an official color from the selected team.  The graphs are also slightly interactive, hovering over bars will display the bars value and clicking on the legend will show or hide that teams data.  
 
 ###### User Profile  
 
-![user-main](C:\Users\John\OneDrive\Desktop\statshot images\user-main.png)
+![user-main](https://github.com/herfalerf/statshot-frontend/blob/master/statshot%20images/user-main.png?raw=true)
 
 Selecting the Profile navigation link on the top right of the navigation bar will take the user to their profile, where they can view and set their favorite team.
 
-![user-fav](C:\Users\John\OneDrive\Desktop\statshot images\user-fav.png)
+![user-fav](https://github.com/herfalerf/statshot-frontend/blob/master/statshot%20images/user-fav.png?raw=true)
 
 Selecting a favorite team will change the text to display the teams name and add a slight UI modification setting the borders of displayed containers to that teams color.  This change will also appear on the main graphs page.  **NOTE:** *Users can always return back  to the main graphs page by clicking the StatShot logo on the top left of the navigation bar.*
 
 ###### Logout  
 
-![logout](C:\Users\John\OneDrive\Desktop\statshot images\logout.png)
+![logout](https://github.com/herfalerf/statshot-frontend/blob/master/statshot%20images/logout.png?raw=true)
 
 Should a user wish to logout, they simply need to click the logout button on the top right of the navigation bar.  The logout message is displayed and the user is returned to the signup/ login page.
 
