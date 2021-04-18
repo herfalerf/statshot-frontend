@@ -1,12 +1,19 @@
 async function generateTeamsList() {
   teamsObj = await Team.getTeams();
+  teamsObj.sort(function (a, b) {
+    let nameA = a.name.toLowerCase(),
+      nameB = b.name.toLowerCase();
+    if (nameA < nameB) return -1;
+    if (nameA > nameB) return 1;
+    else return 0;
+  });
 
   for (let team in teamsObj) {
     let tId;
     let tName;
     let obj = teamsObj[team];
     for (let prop in obj) {
-      if (prop == "teamName") {
+      if (prop == "name") {
         tName = obj[prop];
       }
       if (prop == "id") {
