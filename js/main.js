@@ -4,6 +4,8 @@ const $loginBtn = $("#login-button");
 const $signupBtn = $("#signup-button");
 const $graphs = $("#graphs");
 const $welcome = $("#welcome");
+const $hamburger = $("#hamburger-button");
+const $links = $("#links");
 const $logoutBtn = $("#logout-button");
 const $userBtn = $("#user-button");
 const $message = $("#message");
@@ -26,6 +28,8 @@ function hidePageComponents() {
     $signupBtn,
     $graphs,
     $welcome,
+    // $hamburger,
+    $links,
     $logoutBtn,
     $userBtn,
     $message,

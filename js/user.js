@@ -134,6 +134,8 @@ async function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
   hidePageComponents();
   $graphs.show();
+  // $hamburger.show();
+  $links.show();
   $logoutBtn.show();
   $userBtn.text(`Profile (${currentUser.username})`);
   $userBtn.show();
