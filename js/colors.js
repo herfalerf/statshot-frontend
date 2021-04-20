@@ -1,3 +1,6 @@
+//This file contains functions and data associated with team colors.
+
+//arr container team id and the associated official color
 const teamColors = [
   { 1: "#ce1126" },
   { 2: "#00539b" },
@@ -32,6 +35,7 @@ const teamColors = [
   { 54: "#b4975a" },
 ];
 
+//function which produces the corresponding color code when a team id is passed to it.
 function getTeamColor(id) {
   let color;
 
