@@ -7,6 +7,11 @@ body {
     background-color: #464646;
 }
 
+/* #graphs {
+    background-image: url("https://upload.wikimedia.org/wikipedia/en/thumb/c/ce/Dallas_Stars_logo_%282013%29.svg/1200px-Dallas_Stars_logo_%282013%29.svg.png");
+    background-position: center center;
+} */
+
 #signup-button:hover {
     cursor: pointer;
 }
