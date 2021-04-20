@@ -65,7 +65,7 @@ The front end of StatShot is built using jQuery for DOM manipulation, AXIOS for 
 
 ###### Backend  
 
-The backend of StatShot is built as a discrete API which is deployed on Heroku.  The API is built in Python using Flask with Flask-WTForms and Flask-SQLAlchemy as the primary packages used in construction.  Since the front end is not being created with flask view functions, Flask-WTForms is only being used to validate incoming form data rather than to create forms.  Flask-CORS is used to add the proper cross origin headers to the responses sent from MY API.  Bcrypt is used for password encryption prior to those being stored in the database.  Validation is provided by Flasks built in sessions library and the flask session cookie.  
+The backend of StatShot is built as a discrete API which is deployed on Heroku.  The API is built in Python using Flask with Flask-WTForms and Flask-SQLAlchemy as the primary packages used in construction.  Since the front end is not being created with flask view functions, Flask-WTForms is only being used to validate incoming form data rather than to create forms.  Flask-CORS is used to add the proper cross origin headers to the responses sent from MY API.  Bcrypt is used for password encryption prior to those being stored in the database.  Authorization is provided by Flasks built in sessions library and the flask session cookie.  
 StatShot utilizes PostgreSQL for its database.
 
 #### Conclusion  
