@@ -13,7 +13,7 @@ async function generateTeamsList() {
     else return 0;
   });
 
-  //empties the teams lists prior to adding the teams into them.
+  //empties the teams lists prior to adding the teams into them and then adds the placeholder list options back in.
   $teamsMain.empty();
   $teamsSecond.empty();
   $teamsUser.empty();
