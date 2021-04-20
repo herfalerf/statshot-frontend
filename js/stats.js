@@ -8,6 +8,10 @@ async function generateTeamsList() {
     else return 0;
   });
 
+  $teamsMain.empty();
+  $teamsSecond.empty();
+  $teamsUser.empty();
+
   for (let team in teamsObj) {
     let tId;
     let tName;
