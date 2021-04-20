@@ -1,5 +1,8 @@
+//functions related to DOM manipulation for login/signup.
+
 "use strict";
 
+//function which displays the login form when the login tab is clicked
 function navLoginClick(evt) {
   hidePageComponents();
   $loginContainer.show();
@@ -13,6 +16,7 @@ function navLoginClick(evt) {
 
 $loginBtn.on("click", navLoginClick);
 
+//function which displays the signup form when the signup tab is clicked.
 function navSignupClick(evt) {
   hidePageComponents();
   $loginContainer.show();
@@ -26,6 +30,7 @@ function navSignupClick(evt) {
 
 $signupBtn.on("click", navSignupClick);
 
+//function which hides all page components on successful login
 function updateNavOnLogin() {
   hidePageComponents();
 }

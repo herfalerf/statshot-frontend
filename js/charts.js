@@ -1,5 +1,9 @@
+//this file contains the code associated with creating the charts using Chart.js
+
+// variable to store chart outside of function.
 let teamChart1;
 
+// function to generate the chart using Chart.js
 function generateChart(stat, teamName) {
   let data = stat;
 
@@ -32,6 +36,7 @@ function generateChart(stat, teamName) {
   });
 }
 
+// functions which update the chart when new data is passed to it.
 function updateChartTeam1(chart, data, teamName, teamColor) {
   chart.data.datasets[0].data = data;
   chart.data.datasets[0].label = teamName;

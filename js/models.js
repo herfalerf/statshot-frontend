@@ -1,3 +1,5 @@
+//This file contains models for the User, Team and Stat classes as well as their associated class functions
+
 "use strict";
 
 const BASE_URL = "https://statshot-backend.herokuapp.com/";
@@ -9,6 +11,7 @@ class User {
     this.userId = userId;
   }
 
+  //function to make a POST request to the signup route in the statshot api
   static async signup(username, password) {
     let response = await axios.post(
       `${BASE_URL}/api/users/register`,
@@ -23,6 +26,7 @@ class User {
     return newUser;
   }
 
+  //function to make a POST request to the login route in the statshot api
   static async login(username, password) {
     let response = await axios.post(
       `${BASE_URL}/api/users/login`,
@@ -37,6 +41,7 @@ class User {
     return returnUser;
   }
 
+  //function to make a GET request to the statshot api to determine if a user is stored in the flask session.
   static async checkSession() {
     let response = await axios({
       method: "get",
@@ -48,6 +53,7 @@ class User {
     return sessUser;
   }
 
+  //function to make a POST request to the statshot api to logout a user.
   static async logout() {
     let response = await axios({
       method: "post",
@@ -58,6 +64,7 @@ class User {
     return response;
   }
 
+  //function to make a GET request to the statshot api to get user preferences.
   static async getPrefs(userId) {
     let response = await axios({
       method: "get",
@@ -68,6 +75,7 @@ class User {
     return response.data.prefs.favTeam;
   }
 
+  //function to make a POST request to the statshot api to change user preferences.
   static async setPrefs(userId, favTeamId) {
     let response = await axios.post(
       `${BASE_URL}/api/users/${userId}/prefs`,
@@ -81,14 +89,18 @@ class User {
   }
 }
 
+//variable to store the created team and team name outside of the function in which it is created.
 let teamsObj;
+let teamName;
 
+//Setup Team class and related functions
 class Team {
   constructor(name, id) {
     this.name = name;
     this.id = id;
   }
 
+  //function to make a GET request to the statshot API for the current list of NHL teams
   static async getTeams() {
     let response = await axios.get(`${BASE_URL}/api/teams`, {
       withCredentials: true,
@@ -98,8 +110,7 @@ class Team {
   }
 }
 
-let teamName;
-
+//Setup Stat class and related functions
 class Stat {
   constructor({
     wins,
@@ -125,6 +136,7 @@ class Stat {
     this.powerPlayGoalsAgainst = powerPlayGoalsAgainst;
   }
 
+  //function to make GET request to statshot API for an individual teams statistics.
   static async getTeamStats(teamId) {
     let response = await axios.get(`${BASE_URL}/api/teams/${teamId}`, {
       withCredentials: true,

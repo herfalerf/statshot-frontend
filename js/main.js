@@ -1,3 +1,5 @@
+//This file contains jquery selectors and functions related to basic dom manipulation
+
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
 const $loginBtn = $("#login-button");
@@ -20,6 +22,7 @@ const $favTeamBtn = $("#fav-team-button");
 const $homeBtn = $("#home-button");
 const $loginContainer = $("#login-container");
 
+//function which hides page components when it is called.
 function hidePageComponents() {
   const components = [
     $loginForm,
@@ -28,7 +31,6 @@ function hidePageComponents() {
     $signupBtn,
     $graphs,
     $welcome,
-    // $hamburger,
     $links,
     $logoutBtn,
     $userBtn,
