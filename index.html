@@ -64,6 +64,10 @@
     </nav>
     <main class="flex-shrink-0">
       <p id="message" class="bg-warning"></p>
+      <p id="hint" class="bg-warning">
+        Username and password must be at least 4 characters, but not more than
+        25 characters.
+      </p>
       <div class="container">
         <div id="profile-info" class="m-3 p-3 rounded">
           <p>
@@ -102,7 +106,7 @@
               <div class="col m-2">
                 <label for="teams">Choose a team:</label>
                 <select class="form-select" name="teams-main" id="teams-main">
-                  <option value="" disabled selected>Choose a team</option>
+                  <option default>Choose a team</option>
                 </select>
                 <label for="teams2">Choose a team:</label>
                 <select

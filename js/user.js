@@ -72,8 +72,15 @@ async function signup(evt) {
     saveUserCredentialsInLocalStorage();
     updateUIOnUserLogin();
   } catch (err) {
-    $message.show();
-    $message.text("That username is already taken");
+    console.log(err.response.data.message);
+    if (err.response.data.message == "taken") {
+      $message.show();
+      $message.text("That username is already taken");
+    } else {
+      $message.show();
+      $hint.show();
+      $message.text("That username/password is invalid.");
+    }
   }
 }
 

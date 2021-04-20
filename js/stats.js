@@ -17,6 +17,11 @@ async function generateTeamsList() {
   $teamsMain.empty();
   $teamsSecond.empty();
   $teamsUser.empty();
+  $teamsMain.append("<option disabled selected hidden>Choose a Team</option>");
+  $teamsSecond.append(
+    "<option disabled selected hidden>Choose a Team</option>"
+  );
+  $teamsUser.append("<option disabled selected hidden>Choose a Team</option>");
 
   //generates team id and team name from the teamsObj and appends them to the teams lists.
   for (let team in teamsObj) {

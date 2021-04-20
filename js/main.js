@@ -11,6 +11,7 @@ const $links = $("#links");
 const $logoutBtn = $("#logout-button");
 const $userBtn = $("#user-button");
 const $message = $("#message");
+const $hint = $("#hint");
 const $teamsMain = $("#teams-main");
 const $teamsSecond = $("#teams-second");
 const $teamsUser = $("#teams-user");
@@ -35,6 +36,7 @@ function hidePageComponents() {
     $logoutBtn,
     $userBtn,
     $message,
+    $hint,
     $userProfile,
     $loginContainer,
     $profileInfo,
