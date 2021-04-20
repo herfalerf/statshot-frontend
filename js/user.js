@@ -1,3 +1,5 @@
+//This file stores all of the functions related to login/signup/logout as well as getting and setting user preferences.
+
 "use strict";
 
 //variable to hold the currently-logged-in user, favorite team, and favorite team id
@@ -5,6 +7,7 @@ let currentUser;
 let favTeam;
 let favName;
 
+//function which runs on document load.  Checks if a user is currently logged in and if the user has set a favorite team.  Shows the chart if user logged in, shows login/signup if no user.
 $(document).ready(async function () {
   hidePageComponents();
   currentUser = await checkForUser();
@@ -29,6 +32,7 @@ $(document).ready(async function () {
   }
 });
 
+//function which displays the charts page or the login/signup page when the StatShot logo is clicked depending on if a user is logged in or not.
 async function home(evt) {
   evt.preventDefault();
   hidePageComponents();
@@ -36,19 +40,24 @@ async function home(evt) {
   if (currentUser.userId !== undefined) {
     updateUIOnUserLogin();
   } else {
+    $loginContainer.show();
     $welcome.show();
     $loginBtn.show();
+    $loginForm.show();
     $signupBtn.show();
+    $loginBtn.addClass("border-bottom border-start border-3 rounded");
   }
 }
 
 $homeBtn.on("click", home);
 
+//function to call the checkSession request.
 async function checkForUser() {
   let sessionUser = await User.checkSession();
   return sessionUser;
 }
 
+//function to handle the signup event.  Will signup a user or display a message if the username is unavailable.
 async function signup(evt) {
   evt.preventDefault();
   try {
@@ -70,6 +79,7 @@ async function signup(evt) {
 
 $signupForm.on("submit", signup);
 
+//function to handle the login event.  Will login a user or display a message if the username/password is invalid
 async function login(evt) {
   evt.preventDefault();
 
@@ -93,6 +103,7 @@ async function login(evt) {
 
 $loginForm.on("submit", login);
 
+//function to handle the logout event.  Will hide all of the graph content, clear local storage and display the login/signup page along with a logout message.
 async function logout(evt) {
   evt.preventDefault();
 
@@ -122,6 +133,8 @@ async function saveUserCredentialsInLocalStorage() {
     localStorage.setItem("username", currentUser.username);
     localStorage.setItem("userId", currentUser.userId);
     localStorage.setItem("favTeamId", favTeam);
+
+    //catches error when function is called prior to user setting a favorite team
     try {
       localStorage.setItem("favTeamName", favName.name);
     } catch (err) {
@@ -134,7 +147,6 @@ async function saveUserCredentialsInLocalStorage() {
 function updateUIOnUserLogin() {
   hidePageComponents();
   $graphs.show();
-  // $hamburger.show();
   $links.show();
   $logoutBtn.show();
   $userBtn.text(`Profile (${currentUser.username})`);
@@ -142,6 +154,7 @@ function updateUIOnUserLogin() {
   generateTeamsList();
 }
 
+//function to handle the user profile event.  Will display the user profile when that navigation option is selected.
 async function Profile(evt) {
   evt.preventDefault();
   if (localStorage.userId !== undefined) {
@@ -167,6 +180,7 @@ async function Profile(evt) {
 }
 $userBtn.on("click", Profile);
 
+//function to handle the favorite team selection.
 async function setFavoriteTeam(evt) {
   evt.preventDefault();
   let newFav;
@@ -178,6 +192,8 @@ async function setFavoriteTeam(evt) {
     $userBtn.show();
   } else {
     const teamId = $teamsUser.val();
+
+    // makes request to getTeams so that the team name can be found and stored.
     let teamsList = await Team.getTeams();
 
     newFav = await User.setPrefs(localStorage.userId, teamId);
@@ -191,6 +207,7 @@ async function setFavoriteTeam(evt) {
     $favTeam.text(
       `Your currently selected favorite team is the ${localStorage.favTeamName}`
     );
+    //sets the borders to favorite color immediately so that the user does not have to reload page.
     let favColor = getTeamColor(localStorage.favTeamId);
     $userProfile.css("border-color", `${favColor}`);
     $graphs.css("border-color", `${favColor}`);
