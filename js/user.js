@@ -148,6 +148,7 @@ async function Profile(evt) {
     hidePageComponents();
     $profileInfo.show();
     $userProfile.show();
+    $links.show();
     $logoutBtn.show();
     $userBtn.show();
 
