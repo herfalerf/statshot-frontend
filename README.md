@@ -73,3 +73,12 @@ StatShot utilizes PostgreSQL for its database.
 The greatest challenge for me in creating this project was completely separating the front-end and backend.  I wanted the challenge of making my own API that could be accessible externally, rather than having flask display the routes as it was suggested to me by my mentor that this would be a more realistic method of developing a modern application.  This ended up being the greatest challenge of the project as I was unprepared for the issues I would encounter with cross-origin resource sharing and I spent many hours trying to get API routes that had worked flawlessly when accessed from localhost to work when being accessed by a different domain.  
 I hope you enjoy what StatShot has to offer.
 
+#### Testing
+
+###### Front-end testing with Jasmine  
+
+If you have downloaded the source code and wish to test the front-end, simply uncomment the Jasmine CDN script tags at the bottom of the index.html file.  Open the page locally and the Jasmine testing interface will be displayed.  
+
+###### Backend testing with Python's unittest library
+
+Testing the back end requires Python 3.7.7 or later version of Python 3.7 installed locally with all of the required packages.  Once these requirements have been met, unit tests for specific files can be run through the command line with `python-m unittest test_file_name.py` substituting the filename for the test file to be run.
