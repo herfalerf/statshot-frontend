@@ -22,6 +22,7 @@ $(document).ready(async function () {
   currentUser = await checkForUser();
   if (currentUser.userId !== undefined) {
     favTeam = await User.getPrefs(currentUser.userId);
+
     if (favTeam) {
       let favColor = getTeamColor(favTeam);
       $userProfile.css("border-color", `${favColor}`);
@@ -129,6 +130,9 @@ async function logout(evt) {
   if (teamChart1 !== undefined) {
     teamChart1.destroy();
   }
+  $userProfile.css("border-color", "black");
+  $graphs.css("border-color", "black");
+  $profileInfo.css("border-color", "black");
   hidePageComponents();
   $loginContainer.show();
   $message.show();
@@ -171,6 +175,12 @@ function updateUIOnUserLogin() {
   $logoutBtn.show();
   $userBtn.text(`Profile (${currentUser.username})`);
   $userBtn.show();
+  if (favTeam !== "None") {
+    let favColor = getTeamColor(favTeam);
+    $userProfile.css("border-color", `${favColor}`);
+    $graphs.css("border-color", `${favColor}`);
+    $profileInfo.css("border-color", `${favColor}`);
+  }
   generateTeamsList();
 }
 
