@@ -124,6 +124,10 @@ async function logout(evt) {
 
   await User.logout();
   localStorage.clear();
+  sessionStorage.clear();
+  if (teamChart1 !== undefined) {
+    teamChart1.destroy();
+  }
   hidePageComponents();
   $loginContainer.show();
   $message.show();

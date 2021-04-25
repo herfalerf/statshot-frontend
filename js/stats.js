@@ -57,7 +57,10 @@ async function generateTeamStats(evt) {
   stat = await Stat.getTeamStats(id);
   teamColor = getTeamColor(id);
 
+  // generateChart(stat, teamName, teamColor);
   if (teamChart1 == undefined) {
+    generateChart(stat, teamName, teamColor);
+  } else if (teamChart1.canvas == null) {
     generateChart(stat, teamName, teamColor);
   } else {
     updateChartTeam1(teamChart1, stat, teamName, teamColor);
