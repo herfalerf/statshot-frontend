@@ -2,7 +2,7 @@
 
 "use strict";
 
-const BASE_URL = "https://statshot-backend.herokuapp.com/";
+const BASE_URL = "https://statshot-backend.herokuapp.com";
 
 // Setup User class and related functions
 class User {
