@@ -22,6 +22,7 @@ const $teamsUserForm = $("#fav-team-form");
 const $favTeamBtn = $("#fav-team-button");
 const $homeBtn = $("#home-button");
 const $loginContainer = $("#login-container");
+const $loadContainer = $("#load-container");
 
 //function which hides page components when it is called.
 function hidePageComponents() {
