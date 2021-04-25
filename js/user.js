@@ -7,6 +7,7 @@ let currentUser;
 let favTeam;
 let favName;
 
+//function to display loading element and hide it once page has loaded.
 document.onreadystatechange = function () {
   if (document.readyState !== "complete") {
     $loadContainer.show();
