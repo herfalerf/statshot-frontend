@@ -43,7 +43,9 @@ Selecting the Profile navigation link on the top right of the navigation bar wil
 
 ![user-fav](https://github.com/herfalerf/statshot-frontend/blob/master/statshot%20images/user-fav.png?raw=true)
 
-Selecting a favorite team will change the text to display the teams name and add a slight UI modification setting the borders of displayed containers to that teams color.  This change will also appear on the main graphs page.  **NOTE:** *Users can always return back  to the main graphs page by clicking the StatShot logo on the top left of the navigation bar.*
+Selecting a favorite team will change the text to display the teams name and add a slight UI modification setting the borders of displayed containers to that teams color.  This change will also appear on the main graphs page.  
+Selecting a favorite team will also cause that teams statistics to be displayed upon login, by default.  
+**NOTE:** *Users can always return back  to the main graphs page by clicking the StatShot logo on the top left of the navigation bar.*
 
 ###### Logout  
 
