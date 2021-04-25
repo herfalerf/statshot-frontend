@@ -120,7 +120,7 @@ async function login(evt) {
 
 $loginForm.on("submit", login);
 
-//function to handle the logout event.  Will hide all of the graph content, clear local storage and display the login/signup page along with a logout message.
+//function to handle the logout event.  Will hide all of the graph content, clear local storage, reset user specific styling and display the login/signup page along with a logout message.
 async function logout(evt) {
   evt.preventDefault();
 
