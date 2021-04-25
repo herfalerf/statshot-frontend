@@ -7,6 +7,14 @@ let currentUser;
 let favTeam;
 let favName;
 
+document.onreadystatechange = function () {
+  if (document.readyState !== "complete") {
+    $loadContainer.show();
+  } else {
+    $loadContainer.hide();
+  }
+};
+
 //function which runs on document load.  Checks if a user is currently logged in and if the user has set a favorite team.  Shows the chart if user logged in, shows login/signup if no user.
 $(document).ready(async function () {
   hidePageComponents();
