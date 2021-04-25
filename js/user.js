@@ -48,7 +48,12 @@ async function home(evt) {
   hidePageComponents();
   currentUser = await checkForUser();
   if (currentUser.userId !== undefined) {
-    updateUIOnUserLogin();
+    hidePageComponents();
+    $graphs.show();
+    $links.show();
+    $logoutBtn.show();
+    $userBtn.text(`Profile (${currentUser.username})`);
+    $userBtn.show();
   } else {
     $loginContainer.show();
     $welcome.show();
@@ -168,20 +173,23 @@ async function saveUserCredentialsInLocalStorage() {
 }
 
 //helper function to update the UI on user singup/login
-function updateUIOnUserLogin() {
+async function updateUIOnUserLogin() {
   hidePageComponents();
   $graphs.show();
   $links.show();
   $logoutBtn.show();
   $userBtn.text(`Profile (${currentUser.username})`);
   $userBtn.show();
+  await generateTeamsList();
+  // check if there is a favorite team, if there is set the team 1 drop down to that team and populate the graph with that team's data.
   if (favTeam !== "None") {
     let favColor = getTeamColor(favTeam);
     $userProfile.css("border-color", `${favColor}`);
     $graphs.css("border-color", `${favColor}`);
     $profileInfo.css("border-color", `${favColor}`);
+    generateFavTeamStat(favTeam);
+    $(`#teams-main option[value=${favTeam}]`).prop("selected", true);
   }
-  generateTeamsList();
 }
 
 //function to handle the user profile event.  Will display the user profile when that navigation option is selected.

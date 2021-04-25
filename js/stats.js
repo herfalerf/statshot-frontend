@@ -81,3 +81,16 @@ async function generateSecondTeamStats(evt) {
 }
 
 $teamsSecond.on("change", generateSecondTeamStats);
+
+async function generateFavTeamStat(favTeamId) {
+  stat = await Stat.getTeamStats(favTeamId);
+  teamColor = getTeamColor(favTeamId);
+
+  if (teamChart1 == undefined) {
+    generateChart(stat, teamName, teamColor);
+  } else if (teamChart1.canvas == null) {
+    generateChart(stat, teamName, teamColor);
+  } else {
+    updateChartTeam1(teamChart1, stat, teamName, teamColor);
+  }
+}
