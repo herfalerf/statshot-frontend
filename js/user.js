@@ -19,6 +19,7 @@ document.onreadystatechange = function () {
 //function which runs on document load.  Checks if a user is currently logged in and if the user has set a favorite team.  Shows the chart if user logged in, shows login/signup if no user.
 $(document).ready(async function () {
   hidePageComponents();
+  $loadContainer.show();
   currentUser = await checkForUser();
   if (currentUser.userId !== undefined) {
     favTeam = await User.getPrefs(currentUser.userId);
@@ -47,6 +48,7 @@ async function home(evt) {
   evt.preventDefault();
   hidePageComponents();
   currentUser = await checkForUser();
+
   if (currentUser.userId !== undefined) {
     hidePageComponents();
     $graphs.show();

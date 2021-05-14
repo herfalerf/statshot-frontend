@@ -41,6 +41,7 @@ function hidePageComponents() {
     $userProfile,
     $loginContainer,
     $profileInfo,
+    $loadContainer,
   ];
   components.forEach((c) => c.hide());
 }
